@@ -45,13 +45,12 @@ void display(struct Student **start, struct Student **last) {
     struct Student *ptr;
     ptr = *start;
     while (ptr! = NULL) {
-        cout<<"Roll Number: "<<ptr->rollNumber;
+        cout<<"\nRoll Number: "<<ptr->rollNumber;
         cout<<"\nName: "<<ptr->name;
         cout<<"\nBranch ID: "<<ptr->branchID;
         cout<<"\nCGPA: "<<ptr->cgpa;
-        cout<<"\n";
+        cout<<"\n\n";
         ptr = ptr->next;
-        cout<<"\n";
     }
 }
 int main()
@@ -61,9 +60,10 @@ int main()
     char ch = 'Y';
     while (ch == 'Y') {
         create(&st, &last);
-        cout<<"Do You Want to Continue (Y/N)?";
+        cout<<"\nDo You Want to Continue (Y/N)?";
         cout<<"\nEnter Your Choice: ";
         cin>>ch;
+        cout<<"\n";
     }
     display(&st, &last);
     return 0;

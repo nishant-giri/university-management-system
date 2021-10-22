@@ -1,12 +1,18 @@
 #include<iostream>
 using namespace std;
+struct University {
+    int universityID;
+    string universityName;
+    string universityLocation;
+    int startYear;
+};
 struct Branch {
     int universityID;
-    string branchID;
     string universityName;
-}; 
+    string branchID;
+};
 struct Student {
-    int roll;
+    int rollNumber;
     string name;
     string branchID;
     int cgpa;
@@ -14,11 +20,11 @@ struct Student {
     struct Student *prev;
 };
 void create(struct Student **start, struct Student **last) {
-    Student *new_ptr = new Student;
+    Student *newPtr = new Student;
     cout<<"Enter Name: ";
     cin>>newPtr->name;
     cout<<"Enter Roll Number: ";
-    cin>>newPtr->roll;
+    cin>>newPtr->rollNumber;
     cout<<"Enter Branch ID: ";
     cin>>newPtr->branchID;
     cout<<"Enter CGPA: ";
@@ -39,7 +45,7 @@ void display(struct Student **start, struct Student **last) {
     struct Student *ptr;
     ptr = *start;
     while (ptr! = NULL) {
-        cout<<"Roll Number: "<<ptr->roll;
+        cout<<"Roll Number: "<<ptr->rollNumber;
         cout<<"\nName: "<<ptr->name;
         cout<<"\nBranch ID: "<<ptr->branchID;
         cout<<"\nCGPA: "<<ptr->cgpa;

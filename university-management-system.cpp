@@ -5,11 +5,15 @@ struct University {
     string universityName;
     string universityLocation;
     int startYear;
+    struct University *next;
+    struct University *prev;
 };
 struct Branch {
     int universityID;
     string universityName;
     string branchID;
+    struct Branch *next;
+    struct Branch *prev;
 };
 struct Student {
     string name;

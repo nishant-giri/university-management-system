@@ -20,31 +20,31 @@ struct Student {
     struct Student *prev;
 };
 void create(struct Student **start, struct Student **last) {
-    Student *newPtr = new Student;
+    Student *ptr = new Student;
     cout<<"Enter Name: ";
-    cin>>newPtr->name;
+    cin>>ptr->name;
     cout<<"Enter Roll Number: ";
-    cin>>newPtr->rollNumber;
+    cin>>ptr->rollNumber;
     cout<<"Enter Branch ID: ";
-    cin>>newPtr->branchID;
+    cin>>ptr->branchID;
     cout<<"Enter CGPA: ";
-    cin>>newPtr->cgpa;
-    newPtr->next = NULL;
-    newPtr->prev = NULL;
+    cin>>ptr->cgpa;
+    ptr->next = NULL;
+    ptr->prev = NULL;
     if (*start == NULL) {
-        *start = newPtr;
-        *last = newPtr;  
+        *start = ptr;
+        *last = ptr;  
     }
     else {
-        (*last)->next = newPtr;
-        newPtr->prev = *last;
-        *last = newPtr;
+        *last->next = ptr;
+        ptr->prev = *last;
+        *last = ptr;
     }
 }
 void display(struct Student **start, struct Student **last) {
     struct Student *ptr;
     ptr = *start;
-    while (ptr! = NULL) {
+    while (ptr != NULL) {
         cout<<"\nRoll Number: "<<ptr->rollNumber;
         cout<<"\nName: "<<ptr->name;
         cout<<"\nBranch ID: "<<ptr->branchID;

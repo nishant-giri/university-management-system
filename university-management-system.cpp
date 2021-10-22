@@ -36,7 +36,7 @@ void create(struct Student **start, struct Student **last) {
         *last = ptr;  
     }
     else {
-        *last->next = ptr;
+        (*last)->next = ptr;
         ptr->prev = *last;
         *last = ptr;
     }

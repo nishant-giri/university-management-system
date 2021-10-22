@@ -12,21 +12,22 @@ struct Branch {
     string branchID;
 };
 struct Student {
-    int rollNumber;
     string name;
+    int rollNumber;
     string branchID;
-    int cgpa;
+    float cgpa;
     struct Student *next;
     struct Student *prev;
 };
 void create(struct Student **start, struct Student **last) {
     Student *ptr = new Student;
     cout<<"Enter Name: ";
-    cin>>ptr->name;
+    getline(cin, ptr->name);
     cout<<"Enter Roll Number: ";
     cin>>ptr->rollNumber;
+    getchar();
     cout<<"Enter Branch ID: ";
-    cin>>ptr->branchID;
+    getline(cin, ptr->branchID);
     cout<<"Enter CGPA: ";
     cin>>ptr->cgpa;
     ptr->next = NULL;
@@ -74,10 +75,10 @@ int main()
         create(&st, &last);
         cout<<"\nDo You Want to Continue (Y/N)?";
         cout<<"\nEnter Your Choice: ";
-        getchar();
         cin>>ch;
+        getchar();
         cout<<"\n";
-    } while (ch == 'Y');
+    } while ((ch == 'y') || (ch == 'Y'));
     display(&st, &last);
     return 0;
 }

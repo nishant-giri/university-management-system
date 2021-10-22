@@ -59,17 +59,17 @@ int main()
     struct Student *last = NULL;
     char ch = 'Y';
     struct Branch b1;
-    b1.branch_id="B001";
-    b1.university_id=1;
-    b1.Universitt_name="KIIT";
+    b1.branchID = "B001";
+    b1.universityID = 1;
+    b1.universityName = "KIIT Bhubaneswar";
     struct Branch b2;
-    b2.branch_id="B002";
-    b2.university_id=2;
-    b2.Universitt_name="MIT Manipal";
+    b2.branchID = "B002";
+    b2.universityID = 2;
+    b2.universityName = "MIT Manipal";
     struct Branch b3;
-    b3.branch_id="B003";
-    b3.university_id=3;
-    b3.Universitt_name="VIT Vellore";
+    b3.branchID = "B003";
+    b3.universityID = 3;
+    b3.universityName = "VIT Vellore";
     while (ch == 'Y') {
         create(&st, &last);
         cout<<"\nDo You Want to Continue (Y/N)?";

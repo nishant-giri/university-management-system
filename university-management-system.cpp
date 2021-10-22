@@ -1,5 +1,7 @@
 #include<iostream>
 using namespace std;
+
+//University Structure
 struct University {
     int universityID;
     string universityName;
@@ -8,6 +10,8 @@ struct University {
     struct University *next;
     struct University *prev;
 };
+
+//Branch Structure
 struct Branch {
     int universityID;
     string universityName;
@@ -15,6 +19,8 @@ struct Branch {
     struct Branch *next;
     struct Branch *prev;
 };
+
+//Student Structure
 struct Student {
     string name;
     int rollNumber;
@@ -23,6 +29,7 @@ struct Student {
     struct Student *next;
     struct Student *prev;
 };
+
 void create(struct Student **start, struct Student **last) {
     Student *ptr = new Student;
     cout<<"Enter Name: ";
@@ -46,6 +53,7 @@ void create(struct Student **start, struct Student **last) {
         *last = ptr;
     }
 }
+
 void display(struct Student **start, struct Student **last) {
     struct Student *ptr;
     ptr = *start;
@@ -58,6 +66,7 @@ void display(struct Student **start, struct Student **last) {
         ptr = ptr->next;
     }
 }
+
 int main()
 {
     struct Student *st = NULL;

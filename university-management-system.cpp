@@ -58,6 +58,18 @@ int main()
     struct Student *st = NULL;
     struct Student *last = NULL;
     char ch = 'Y';
+    struct Branch b1;
+    b1.branch_id="B001";
+    b1.university_id=1;
+    b1.Universitt_name="KIIT";
+    struct Branch b2;
+    b2.branch_id="B002";
+    b2.university_id=2;
+    b2.Universitt_name="MIT Manipal";
+    struct Branch b3;
+    b3.branch_id="B003";
+    b3.university_id=3;
+    b3.Universitt_name="VIT Vellore";
     while (ch == 'Y') {
         create(&st, &last);
         cout<<"\nDo You Want to Continue (Y/N)?";

@@ -1,73 +1,64 @@
 #include<iostream>
 using namespace std;
-struct Student
-{
+struct Branch {
+    int universityID;
+    string branchID;
+    string universityName;
+}; 
+struct Student {
     int roll;
     string name;
-    string branch_id;
+    string branchID;
     int cgpa;
     struct Student *next;
     struct Student *prev;
 };
-struct branch 
-{
-  string branch_id;
-  int university_id;
-  string university_name;
-}; 
-void create(struct Student **start,struct Student **last)
-{
-  Student *nw=new Student;
- cout<<"\nEnter Name:-";
- cin>>nw->name;
- cout<<"\nEnter Rollno:";
- cin>>nw->roll;
- cout<<"\nEnter Branch ID:-";
- cin>>nw->branch_id;
- cout<<"\nEnter CGPA:-";
- cin>>nw->cgpa;
- nw->next=NULL;
- nw->prev=NULL;
- 
- if(*start==NULL)
- {
-     *start=nw;
-     *last=nw;  
- }
- else
- {
-     (*last)->next=nw;
-     nw->prev=*last;
-     *last=nw;
-
- }
+void create(struct Student **start, struct Student **last) {
+    Student *new_ptr = new Student;
+    cout<<"Enter Name: ";
+    cin>>newPtr->name;
+    cout<<"Enter Roll Number: ";
+    cin>>newPtr->roll;
+    cout<<"Enter Branch ID: ";
+    cin>>newPtr->branchID;
+    cout<<"Enter CGPA: ";
+    cin>>newPtr->cgpa;
+    newPtr->next = NULL;
+    newPtr->prev = NULL;
+    if (*start == NULL) {
+        *start = newPtr;
+        *last = newPtr;  
+    }
+    else {
+        (*last)->next = newPtr;
+        newPtr->prev = *last;
+        *last = newPtr;
+    }
 }
-void display(struct Student **start,struct Student **last )
-{
-    struct Student *t;
-    t=*start;
-    while(t!=NULL)
-    {
-        cout<<"Roll no: "<<t->roll<<endl;
-        cout<<"NAME: "<<t->name<<endl;
-        cout<<"Branch ID: "<<t->branch_id<<endl;
-        cout<<"CGPA: "<<t->cgpa<<endl;
-       t=t->next;
-       cout<<endl;
- 
+void display(struct Student **start, struct Student **last) {
+    struct Student *ptr;
+    ptr = *start;
+    while (ptr! = NULL) {
+        cout<<"Roll Number: "<<ptr->roll;
+        cout<<"\nName: "<<ptr->name;
+        cout<<"\nBranch ID: "<<ptr->branchID;
+        cout<<"\nCGPA: "<<ptr->cgpa;
+        cout<<"\n";
+        ptr = ptr->next;
+        cout<<"\n";
     }
 }
 int main()
 {
-    struct Student *st=NULL;
-    struct Student *l=NULL;
-    char ch='y';
-    while(ch=='y')
-    {
-        create(&st,&l);
-        cout<<"Add more(y/n)?"<<endl;
+    struct Student *st = NULL;
+    struct Student *last = NULL;
+    char ch = 'Y';
+    while (ch == 'Y') {
+        create(&st, &last);
+        cout<<"Do You Want to Continue (Y/N)?";
+        cout<<"\nEnter Your Choice: ";
         cin>>ch;
     }
-    display(&st,&l);
+    display(&st, &last);
     return 0;
 }

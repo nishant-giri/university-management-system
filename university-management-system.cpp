@@ -74,6 +74,7 @@ int main()
         create(&st, &last);
         cout<<"\nDo You Want to Continue (Y/N)?";
         cout<<"\nEnter Your Choice: ";
+        getchar();
         cin>>ch;
         cout<<"\n";
     }

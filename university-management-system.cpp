@@ -9,6 +9,12 @@ struct Student
     struct Student *next;
     struct Student *prev;
 };
+struct branch 
+{
+  string branch_id;
+  int university_id;
+  string university_name;
+}; 
 void create(struct Student **start,struct Student **last)
 {
   Student *nw=new Student;

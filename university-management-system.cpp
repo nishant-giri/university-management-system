@@ -1,6 +1,7 @@
 #include<iostream>
 using namespace std;
-struct University {
+struct University 
+{
     int universityID;
     string universityName;
     string universityLocation;

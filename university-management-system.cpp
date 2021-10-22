@@ -57,7 +57,7 @@ int main()
 {
     struct Student *st = NULL;
     struct Student *last = NULL;
-    char ch = 'Y';
+    char ch;
     struct Branch b1;
     b1.branchID = "B001";
     b1.universityID = 1;
@@ -70,14 +70,14 @@ int main()
     b3.branchID = "B003";
     b3.universityID = 3;
     b3.universityName = "VIT Vellore";
-    while (ch == 'Y') {
+    do {
         create(&st, &last);
         cout<<"\nDo You Want to Continue (Y/N)?";
         cout<<"\nEnter Your Choice: ";
         getchar();
         cin>>ch;
         cout<<"\n";
-    }
+    } while (ch == 'Y');
     display(&st, &last);
     return 0;
 }

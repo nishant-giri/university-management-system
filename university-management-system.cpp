@@ -68,10 +68,24 @@ void display(struct Student **start, struct Student **last) {
     }
 }
 
+void display(struct Branch** start)
+{
+    struct Branch* temp = *start;
+    while (temp != NULL)
+    {
+        cout<<"\n\nBranch ID: "<<temp->branchID;
+        cout<<"\nBranch name: "<<temp->branch_name;
+        cout<<"\nUniversity ID: "<<temp->universityID;
+        temp = temp->next;
+    }
+}
+
 int main()
 {
     struct Student *st = NULL;
     struct Student *last = NULL;
+    struct Branch* BRstart = NULL;
+    struct Branch* BRlast = NULL;
     char ch;
     struct Branch* b1 = new struct Branch;
     b1->branchID = "B001";
@@ -99,6 +113,16 @@ int main()
         getchar();
         cout<<"\n";
     } while ((ch == 'y') || (ch == 'Y'));
+    ch = '0';
+    cout<<"Enter 'Y' to create a branch or any other alpahabet to continue: ";
+    cin>>ch;
+    while (ch == 'y' || ch == 'Y')
+    {
+        create(&BRstart, &BRlast);
+        cout<<"\nDo You Want to Continue (Y/N)? ";
+        cin>>ch;
+    }
     display(&st, &last);
+    display(&BRstart);
     return 0;
 }

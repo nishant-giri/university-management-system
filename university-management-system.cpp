@@ -15,7 +15,7 @@ struct University {
 struct Branch {
     int universityID;
     string universityName;
-    string branch_name;
+    string branchName;
     string branchID;
     struct Branch *next;
     struct Branch *prev;

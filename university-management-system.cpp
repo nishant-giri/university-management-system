@@ -3,7 +3,7 @@ using namespace std;
 
 // University Structure
 struct University {
-    int universityID;
+    string universityID;
     string universityName;
     string universityLocation;
     int startYear;
@@ -13,7 +13,7 @@ struct University {
 
 // Branch Structure
 struct Branch {
-    int universityID;
+    string universityID;
     string universityName;
     string branchName;
     string branchID;
@@ -75,18 +75,18 @@ int main()
     char ch;
     struct Branch* b1 = new struct Branch;
     b1->branchID = "B001";
-    b1->universityID = 1;
+    b1->universityID = "U001";
     b1->universityName = "KIIT Bhubaneswar";
     b1->prev = NULL;
     struct Branch* b2 = new struct Branch;
     b2->branchID = "B002";
-    b2->universityID = 2;
+    b2->universityID = "U002";
     b2->universityName = "MIT Manipal";
     b2->prev = b1;
     b1->next = b2;
     struct Branch* b3 = new struct Branch;
     b3->branchID = "B003";
-    b3->universityID = 3;
+    b3->universityID = "U003";
     b3->universityName = "VIT Vellore";
     b3->prev = b2;
     b2->next = b3;

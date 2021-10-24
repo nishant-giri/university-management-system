@@ -1,4 +1,6 @@
 #include<iostream>
+#include<string.h>
+#include<cstring>
 using namespace std;
 
 // University Structure
@@ -13,7 +15,7 @@ struct University {
 
 // Branch Structure
 struct Branch {
-    string universityName;
+    //string universityName;
     string universityID;
     string branchName;
     string branchID;
@@ -31,6 +33,22 @@ struct Student {
     struct Student *prev;
 };
 
+// void capital(string &name)
+// {
+//     int l = name.length();
+//     for(int i=0;i<l;i++)
+//     {
+//         char c=name[i];
+//         if (islower(c))
+//         {
+//             name[i]=toupper(c);
+//         }
+//         else
+//           continue;
+
+//     }
+// }
+
 void create(struct Branch** start, struct Branch** last) {
     struct Branch* p = *last;
     Branch* ptr = new Branch;
@@ -39,6 +57,20 @@ void create(struct Branch** start, struct Branch** last) {
     getchar();
     cout<<"\nEnter Branch Name: ";
     getline(cin, ptr->branchName);
+    string bname=ptr->branchName;
+    int l= bname.length();
+    for(int i=0;i<l;i++)
+    {
+        char c=bname[i];
+        if (islower(c))
+        {
+            bname[i]=toupper(c);
+        }
+        else
+          continue;
+
+    }
+    ptr->branchName=bname;
     cout<<"Enter University ID: ";
     getline(cin, ptr->universityID);
     cout<<"Enter Branch ID: ";
@@ -57,6 +89,20 @@ void create(struct Student **start, struct Student **last) {
     Student *ptr = new Student;
     cout<<"Enter Name: ";
     getline(cin, ptr->name);
+    string sname=ptr->name;
+    int l= sname.length();
+    for(int i=0;i<l;i++)
+    {
+        char c=sname[i];
+        if (islower(c))
+        {
+            sname[i]=toupper(c);
+        }
+        else
+          continue;
+
+    }
+    ptr->name=sname;
     cout<<"Enter Roll Number: ";
     cin>>ptr->rollNumber;
     getchar();
@@ -103,28 +149,44 @@ void display(struct Branch** start)
     }
 }
 
+void display(struct University** start)
+{
+    struct University* ptr = *start;
+    while (ptr != NULL)
+    {
+        cout<<"University Name: "<<ptr->universityName;
+        cout<<"\nUniversity ID: "<<ptr->universityID;
+        cout<<"\nUniversity Location: "<<ptr->universityLocation;
+        cout<<"\nStart Year: "<<ptr->startYear;
+        cout<<"\n";
+        ptr = ptr->next;
+    }
+}
+
 int main()
 {
     struct Student *st = NULL;
     struct Student *last = NULL;
     struct Branch* BRstart = NULL;
     struct Branch* BRlast = NULL;
+    struct University* u_start=NULL;
+    struct University* u_last=NULL;
     char ch;
     struct Branch* b1 = new struct Branch;
-    b1->branchID = "B001";
+    b1->branchID = "CS1";
     b1->universityID = "U001";
-    b1->universityName = "KIIT Bhubaneswar";
+    b1->branchName = "COMPUTER SCIENCE";
     b1->prev = NULL;
     struct Branch* b2 = new struct Branch;
-    b2->branchID = "B002";
+    b2->branchID = "EE1";
     b2->universityID = "U002";
-    b2->universityName = "MIT Manipal";
+    b2->branchName = "ELECTRONICS";
     b2->prev = b1;
     b1->next = b2;
     struct Branch* b3 = new struct Branch;
-    b3->branchID = "B003";
+    b3->branchID = "ME1";
     b3->universityID = "U003";
-    b3->universityName = "VIT Vellore";
+    b3->branchName = "MECHANICAL";
     b3->prev = b2;
     b2->next = b3;
     b3->next = NULL;
@@ -149,5 +211,6 @@ int main()
     }
     display(&st, &last);
     display(&BRstart);
+    display(&u_start);
     return 0;
 }

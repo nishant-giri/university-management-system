@@ -137,12 +137,14 @@ int main()
         cout<<"\n";
     } while ((ch == 'y') || (ch == 'Y'));
     ch = '0';
-    cout<<"Enter 'Y' to create a branch or any other alpahabet to continue: ";
+    cout<<"Do You Want to Create a Branch (Y/N)?";
+    cout<<"\nEnter Your Choice: ";
     cin>>ch;
     while (ch == 'y' || ch == 'Y')
     {
         create(&BRstart, &BRlast);
-        cout<<"\nDo You Want to Continue (Y/N)? ";
+        cout<<"\nDo You Want to Continue (Y/N)?";
+        cout<<"\nEnter Your Choice: ";
         cin>>ch;
     }
     display(&st, &last);

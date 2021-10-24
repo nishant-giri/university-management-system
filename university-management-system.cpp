@@ -33,22 +33,7 @@ struct Student {
     struct Student *prev;
 };
 
-// void capital(string &name)
-// {
-//     int l = name.length();
-//     for(int i=0;i<l;i++)
-//     {
-//         char c=name[i];
-//         if (islower(c))
-//         {
-//             name[i]=toupper(c);
-//         }
-//         else
-//           continue;
-
-//     }
-// }
-
+//creation of branch list
 void create(struct Branch** start, struct Branch** last) {
     struct Branch* p = *last;
     Branch* ptr = new Branch;
@@ -85,6 +70,7 @@ void create(struct Branch** start, struct Branch** last) {
     }
 }
 
+//craetion of student list
 void create(struct Student **start, struct Student **last) {
     Student *ptr = new Student;
     cout<<"Enter Name: ";
@@ -123,6 +109,7 @@ void create(struct Student **start, struct Student **last) {
     }
 }
 
+//student list display 
 void display(struct Student **start, struct Student **last) {
     struct Student *ptr;
     ptr = *start;
@@ -136,6 +123,7 @@ void display(struct Student **start, struct Student **last) {
     }
 }
 
+//branch list display
 void display(struct Branch** start)
 {
     struct Branch* ptr = *start;
@@ -149,6 +137,7 @@ void display(struct Branch** start)
     }
 }
 
+//university list display
 void display(struct University** start)
 {
     struct University* ptr = *start;
@@ -172,24 +161,168 @@ int main()
     struct University* u_start=NULL;
     struct University* u_last=NULL;
     char ch;
+
+    //total 4 branches- 3 same ,1 unique
+    //1.1
     struct Branch* b1 = new struct Branch;
     b1->branchID = "CS1";
     b1->universityID = "U001";
     b1->branchName = "COMPUTER SCIENCE";
     b1->prev = NULL;
+
+    //1.2
     struct Branch* b2 = new struct Branch;
     b2->branchID = "EE1";
-    b2->universityID = "U002";
+    b2->universityID = "U001";
     b2->branchName = "ELECTRONICS";
     b2->prev = b1;
     b1->next = b2;
+
+    //1.3
     struct Branch* b3 = new struct Branch;
     b3->branchID = "ME1";
-    b3->universityID = "U003";
+    b3->universityID = "U001";
     b3->branchName = "MECHANICAL";
     b3->prev = b2;
     b2->next = b3;
-    b3->next = NULL;
+
+    //1.4
+    struct Branch* b4 = new struct Branch;
+    b4->branchID = "BT1";
+    b4->universityID = "U001";
+    b4->branchName = "BIOTECHNOLOGY";
+    b4->prev = b3;
+    b3->next = b4;
+ 
+    //2.1
+    struct Branch* b5 = new struct Branch;
+    b5->branchID = "CS1";
+    b5->universityID = "U002";
+    b5->branchName = "COMPUTER SCIENCE";
+    b5->prev = b4;
+    b4->next = b5;
+
+    //2.2
+    struct Branch* b6 = new struct Branch;
+    b6->branchID = "EE1";
+    b6->universityID = "U002";
+    b6->branchName = "ELECTRONICS";
+    b6->prev = b5;
+    b5->next = b6;
+
+    //2.3
+    struct Branch* b7 = new struct Branch;
+    b7->branchID = "ME1";
+    b7->universityID = "U002";
+    b7->branchName = "MECHANICAL";
+    b7->prev = b6;
+    b6->next = b7;
+    
+    //2.4
+    struct Branch* b8 = new struct Branch;
+    b8->branchID = "LAW1";
+    b8->universityID = "U002";
+    b8->branchName = "LAW";
+    b8->prev = b7;
+    b7->next = b8;
+
+    //3.1
+    struct Branch* b9 = new struct Branch;
+    b9->branchID = "CS1";
+    b9->universityID = "U003";
+    b9->branchName = "COMPUTER SCIENCE";
+    b9->prev = b8;
+    b8->next = b9;
+
+    //3.2
+    struct Branch* b10 = new struct Branch;
+    b10->branchID = "EE1";
+    b10->universityID = "U003";
+    b10->branchName = "ELECTRONICS";
+    b10->prev = b9;
+    b9->next = b10;
+
+    //3.3
+    struct Branch* b11 = new struct Branch;
+    b11->branchID = "ME1";
+    b11->universityID = "U003";
+    b11->branchName = "MECHANICAL";
+    b11->prev = b10;
+    b10->next = b11;
+    
+    //3.4
+    struct Branch* b12 = new struct Branch;
+    b12->branchID = "MRE1";
+    b12->universityID = "U003";
+    b12->branchName = "MARINE";
+    b12->prev = b11;
+    b11->next = b12;
+
+    //4.1
+    struct Branch* b13 = new struct Branch;
+    b13->branchID = "CS1";
+    b13->universityID = "U004";
+    b13->branchName = "COMPUTER SCIENCE";
+    b13->prev = b12;
+    b12->next = b13;
+
+    //4.2
+    struct Branch* b14 = new struct Branch;
+    b14->branchID = "EE1";
+    b14->universityID = "U004";
+    b14->branchName = "ELECTRONICS";
+    b14->prev = b13;
+    b13->next = b14;
+
+    //4.3
+    struct Branch* b15 = new struct Branch;
+    b15->branchID = "ME1";
+    b15->universityID = "U004";
+    b15->branchName = "MECHANICAL";
+    b15->prev = b14;
+    b14->next = b15;
+    
+    //4.4
+    struct Branch* b16 = new struct Branch;
+    b16->branchID = "AGR1";
+    b16->universityID = "U004";
+    b16->branchName = "AGRICULTURE";
+    b16->prev = b15;
+    b15->next = b16;
+
+    //5.1
+    struct Branch* b17 = new struct Branch;
+    b17->branchID = "CS1";
+    b17->universityID = "U005";
+    b17->branchName = "COMPUTER SCIENCE";
+    b17->prev = b16;
+    b16->next = b17;
+
+    //5.2
+    struct Branch* b18 = new struct Branch;
+    b18->branchID = "EE1";
+    b18->universityID = "U005";
+    b18->branchName = "ELECTRONICS";
+    b18->prev = b17;
+    b17->next = b18;
+
+    //5.3
+    struct Branch* b19 = new struct Branch;
+    b19->branchID = "ME1";
+    b19->universityID = "U005";
+    b19->branchName = "MECHANICAL";
+    b19->prev = b18;
+    b18->next = b19;
+    
+    //5.4
+    struct Branch* b20 = new struct Branch;
+    b20->branchID = "AE1";
+    b20->universityID = "U005";
+    b20->branchName = "AEROSPACE";
+    b20->prev = b19;
+    b19->next = b20;
+    b20->next = NULL;
+
     do {
         create(&st, &last);
         cout<<"\nDo You Want to Continue (Y/N)?";

@@ -31,25 +31,24 @@ struct Student {
     struct Student *prev;
 };
 
-void create(struct Branch** start, struct Branch** last)
-{
+void create(struct Branch** start, struct Branch** last) {
     struct Branch* p = *last;
     Branch* ptr = new Branch;
     ptr->next = NULL;
     ptr->prev = NULL;
-    cout<<"\nEnter branch name: ";
-    cin>> ptr->branch_name;
-    cout<<"\nEnter university ID: ";
-    cin>> ptr->universityID;
-    cout<<"\nEnter branch ID: ";
-    cin>> ptr->branchID;
-    if (*start == NULL)
-    {
+    cout<<"\nEnter Branch Name: ";
+    getline(cin, ptr->branch_name);
+    getchar();
+    cout<<"Enter University ID: ";
+    getline(cin, ptr->universityID);
+    getchar();
+    cout<<"Enter Branch ID: ";
+    getline(cin, ptr->branchID);
+    if (*start == NULL) {
         *start = ptr;
         *last = ptr;
     }
-    else
-    {
+    else {
         ptr->prev = p;
         p->next = ptr;
     }

@@ -3,8 +3,8 @@ using namespace std;
 
 // University Structure
 struct University {
-    string universityID;
     string universityName;
+    string universityID;
     string universityLocation;
     int startYear;
     struct University *next;
@@ -13,9 +13,9 @@ struct University {
 
 // Branch Structure
 struct Branch {
-    string universityID;
     string universityName;
-    string branch_name;
+    string universityID;
+    string branchName;
     string branchID;
     struct Branch *next;
     struct Branch *prev;
@@ -36,12 +36,11 @@ void create(struct Branch** start, struct Branch** last) {
     Branch* ptr = new Branch;
     ptr->next = NULL;
     ptr->prev = NULL;
-    cout<<"\nEnter Branch Name: ";
-    getline(cin, ptr->branch_name);
     getchar();
+    cout<<"\nEnter Branch Name: ";
+    getline(cin, ptr->branchName);
     cout<<"Enter University ID: ";
     getline(cin, ptr->universityID);
-    getchar();
     cout<<"Enter Branch ID: ";
     getline(cin, ptr->branchID);
     if (*start == NULL) {
@@ -82,8 +81,8 @@ void display(struct Student **start, struct Student **last) {
     struct Student *ptr;
     ptr = *start;
     while (ptr != NULL) {
-        cout<<"\nRoll Number: "<<ptr->rollNumber;
         cout<<"\nName: "<<ptr->name;
+        cout<<"\nRoll Number: "<<ptr->rollNumber;
         cout<<"\nBranch ID: "<<ptr->branchID;
         cout<<"\nCGPA: "<<ptr->cgpa;
         cout<<"\n\n";
@@ -93,13 +92,14 @@ void display(struct Student **start, struct Student **last) {
 
 void display(struct Branch** start)
 {
-    struct Branch* temp = *start;
-    while (temp != NULL)
+    struct Branch* ptr = *start;
+    while (ptr != NULL)
     {
-        cout<<"\n\nBranch ID: "<<temp->branchID;
-        cout<<"\nBranch name: "<<temp->branch_name;
-        cout<<"\nUniversity ID: "<<temp->universityID;
-        temp = temp->next;
+        cout<<"Branch Name: "<<ptr->branchName;
+        cout<<"\nBranch ID: "<<ptr->branchID;
+        cout<<"\nUniversity ID: "<<ptr->universityID;
+        cout<<"\n";
+        ptr = ptr->next;
     }
 }
 

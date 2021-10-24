@@ -15,7 +15,7 @@ struct University {
 struct Branch {
     string universityID;
     string universityName;
-    string branchName;
+    string branch_name;
     string branchID;
     struct Branch *next;
     struct Branch *prev;
@@ -30,6 +30,30 @@ struct Student {
     struct Student *next;
     struct Student *prev;
 };
+
+void create(struct Branch** start, struct Branch** last)
+{
+    struct Branch* p = *last;
+    Branch* ptr = new Branch;
+    ptr->next = NULL;
+    ptr->prev = NULL;
+    cout<<"\nEnter branch name: ";
+    cin>> ptr->branch_name;
+    cout<<"\nEnter university ID: ";
+    cin>> ptr->universityID;
+    cout<<"\nEnter branch ID: ";
+    cin>> ptr->branchID;
+    if (*start == NULL)
+    {
+        *start = ptr;
+        *last = ptr;
+    }
+    else
+    {
+        ptr->prev = p;
+        p->next = ptr;
+    }
+}
 
 void create(struct Student **start, struct Student **last) {
     Student *ptr = new Student;

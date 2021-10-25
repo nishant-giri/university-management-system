@@ -151,7 +151,37 @@ void display(struct University** start)
         ptr = ptr->next;
     }
 }
+//display list of branches of a particular University
+void DispBranch(struct Branch** start,struct University**start1)
+{   string uc;
+    cout<<"UNIVERSITIES AND CODES"<<endl;
+//displaying universities and their respective codes
+struct University* ptr1 = *start1;
+    while (ptr1!= NULL)
+    {
+        cout<<"University Name: "<<ptr1->universityName;
+        cout<<"\tUniversity ID: "<<ptr1->universityID;
+        cout<<"\n";
+        ptr1 = ptr1->next;
 
+    }
+  
+    cout<<"\n\nEnter the University code:";
+    cin>>uc;
+    cout<<"\nBranches available:\n";
+     struct Branch *ptr = *start;
+    while (ptr != NULL)
+    { 
+        if((ptr->universityID)!=uc)
+        {}
+        else
+        {
+        cout<<ptr->branchName<<endl;
+        }
+        
+        ptr = ptr->next;
+    }
+}
 int main()
 {
     struct Student *st = NULL;
@@ -345,5 +375,6 @@ int main()
     display(&st, &last);
     display(&BRstart);
     display(&u_start);
+    DispBranch(&BRstart,&u_start);
     return 0;
 }

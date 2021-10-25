@@ -170,7 +170,7 @@ void display(struct Branch** start)
         cout<<"Branch Name: "<<ptr->branchName;
         cout<<"\nBranch ID: "<<ptr->branchID;
         cout<<"\nUniversity ID: "<<ptr->universityID;
-        cout<<"\n";
+        cout<<"\n\n";
         ptr = ptr->next;
     }
 }

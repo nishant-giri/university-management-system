@@ -33,6 +33,64 @@ struct Student {
     struct Student *prev;
 };
 
+// Creation of University List
+void create(struct University** start, struct Branch** last) {
+    struct University* p = *last;
+    University* ptr = new University;
+    ptr->next = NULL;
+    ptr->prev = NULL;
+    getchar();
+    cout<<"\nEnter University Name: ";
+    getline(cin, ptr->universityName);
+    string tempUniversityName = ptr->universityName;
+    int l = tempUniversityName.length();
+    for (int i = 0; i < l; i++)
+    {
+        char c = tempUniversityName[i];
+        if (islower(c))
+            tempUniversityName[i] = toupper(c);
+        else
+            continue;
+    }
+    ptr->universityName = tempUniversityName;
+    cout<<"Enter University ID: ";
+    getline(cin, ptr->universityID);
+    tempUniversityID = ptr->universityID;
+    l = tempUniversityID.length();
+    for (int i = 0; i < l; i++)
+    {
+        char c = tempUniversityID[i];
+        if (islower(c))
+            tempUniversityID[i] = toupper(c);
+        else
+            continue;
+    }
+    ptr->universityID = tempUniversityID;
+    cout<<"Enter University Location: ";
+    getline(cin, ptr->universityLocation);
+    tempUniversityLocation = ptr->universityLocation;
+    l = tempUniversityLocation.length();
+    for (int i = 0; i < l; i++)
+    {
+        char c = tempUniversityLocation[i];
+        if (islower(c))
+            tempUniversityLocation[i] = toupper(c);
+        else
+            continue;
+    }
+    ptr->universityLocation = tempUniversityLocation;
+    cout<<"Enter Start Year of University: ";
+    cin>>ptr->universityLocation;
+    if (*start == NULL) {
+        *start = ptr;
+        *last = ptr;
+    }
+    else {
+        ptr->prev = p;
+        p->next = ptr;
+    }
+}
+
 //creation of branch list
 void create(struct Branch** start, struct Branch** last) {
     struct Branch* p = *last;

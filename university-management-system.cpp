@@ -438,10 +438,59 @@ int main()
     struct Student *last = NULL;
     struct Branch* BRstart = NULL;
     struct Branch* BRlast = NULL;
-    struct University* u_start=NULL;
-    struct University* u_last=NULL;
+    struct University* universityStart = NULL;
+    struct University* universityLast = NULL;
     char ch;
 
+    // Total 5 Universities
+     
+    // University 1
+    struct University* u1 = new struct University;
+    u1->universityName = "KIIT";
+    u1->universityID = "U001";
+    u1->universityLocation = "Bhubaneswar";
+    u1->startYear = 1992;
+    u1->prev = NULL;
+
+    // University 2
+    struct University* u2 = new struct University;
+    u2->universityName = "VIT";
+    u2->universityID = "U002";
+    u2->universityLocation = "Vellore";
+    u2->startYear = 1984;
+    u2->prev = u1;
+    u1->next = u2;
+
+    // University 3
+    struct University* u3 = new struct University;
+    u3->universityName = "MAHE";
+    u3->universityID = "U003";
+    u3->universityLocation = "Manipal";
+    u3->startYear = 1953;
+    u3->prev = u2;
+    u2->next = u3;
+
+    // University 4
+    struct University* u4 = new struct University;
+    u4->universityName = "BITS";
+    u4->universityID = "U004";
+    u4->universityLocation = "Pilani";
+    u4->startYear = 1964;
+    u4->prev = u3;
+    u3->next = u4;
+
+    // University 5
+    struct University* u5 = new struct University;
+    u5->universityName = "TIET";
+    u5->universityID = "U005";
+    u5->universityLocation = "Thapar";
+    u5->startYear = 1956;
+    u5->prev = u4;
+    u4->next = u5;
+    
+    universityStart = u1;
+    universityLast = u5;
+    
     //total 4 branches- 3 same ,1 unique
     //1.1
     struct Branch* b1 = new struct Branch;

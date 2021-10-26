@@ -53,13 +53,38 @@ void create(struct Branch** start, struct Branch** last) {
         }
         else
           continue;
-
     }
     ptr->branchName=bname;
     cout<<"Enter University ID: ";
     getline(cin, ptr->universityID);
+    bname=ptr->universityID;
+    l= bname.length();
+    for(int i=0;i<l;i++)
+    {
+        char c=bname[i];
+        if (islower(c))
+        {
+            bname[i]=toupper(c);
+        }
+        else
+          continue;
+    }
+    ptr->universityID=bname;
     cout<<"Enter Branch ID: ";
     getline(cin, ptr->branchID);
+    bname=ptr->branchID;
+    l= bname.length();
+    for(int i=0;i<l;i++)
+    {
+        char c=bname[i];
+        if (islower(c))
+        {
+            bname[i]=toupper(c);
+        }
+        else
+          continue;
+    }
+    ptr->branchID=bname;
     if (*start == NULL) {
         *start = ptr;
         *last = ptr;
@@ -70,7 +95,7 @@ void create(struct Branch** start, struct Branch** last) {
     }
 }
 
-//craetion of student list
+//creation of student list
 void create(struct Student **start, struct Student **last) {
     Student *ptr = new Student;
     cout<<"Enter Name: ";
@@ -94,6 +119,19 @@ void create(struct Student **start, struct Student **last) {
     getchar();
     cout<<"Enter Branch ID: ";
     getline(cin, ptr->branchID);
+    sname=ptr->branchID;
+    l= sname.length();
+    for(int i=0;i<l;i++)
+    {
+        char c=sname[i];
+        if (islower(c))
+        {
+            sname[i]=toupper(c);
+        }
+        else
+          continue;
+    }
+    ptr->branchID=sname;
     cout<<"Enter CGPA: ";
     cin>>ptr->cgpa;
     ptr->next = NULL;
@@ -132,7 +170,7 @@ void display(struct Branch** start)
         cout<<"Branch Name: "<<ptr->branchName;
         cout<<"\nBranch ID: "<<ptr->branchID;
         cout<<"\nUniversity ID: "<<ptr->universityID;
-        cout<<"\n";
+        cout<<"\n\n";
         ptr = ptr->next;
     }
 }
@@ -151,6 +189,160 @@ void display(struct University** start)
         ptr = ptr->next;
     }
 }
+
+//Student modification
+void modify(Student** start)
+{
+    int key;
+    cout<<"Enter roll number of student: ";
+    cin>>key;
+    Student* p = *start;
+    while (p != NULL)
+    {
+        if (p->rollNumber == key)
+        {
+            cout<<"Enter Name: ";
+            getchar();
+            getline(cin, p->name);
+            string sname=p->name;
+            int l= sname.length();
+            for(int i=0;i<l;i++)
+            {
+                char c=sname[i];
+                if (islower(c))
+                {
+                    sname[i]=toupper(c);
+                }
+                else
+                continue;
+            }
+            p->name=sname;
+            cout<<"Enter Roll Number: ";
+            cin>>p->rollNumber;
+            cout<<"Enter Branch ID: ";
+            getchar();
+            getline(cin, p->branchID);
+            sname=p->branchID;
+            l= sname.length();
+            for(int i=0;i<l;i++)
+            {
+                char c=sname[i];
+                if (islower(c))
+                {
+                    sname[i]=toupper(c);
+                }
+                else
+                continue;
+            }
+            p->branchID=sname;
+            cout<<"Enter CGPA: ";
+            cin>>p->cgpa;
+            break;
+        }
+        p = p->next;
+    }
+    if(p == NULL)
+        cout<<"\n\nInvalid roll number entered!\n\n";
+}
+
+//Branch modification
+void modify(Branch** start)
+{
+    string key1, key2;
+    cout<<"Enter branch ID to be modified: ";
+    cin>>key1;
+    string bname=key1;
+    int l= bname.length();
+    for(int i=0;i<l;i++)
+        {
+            char c=bname[i];
+            if (islower(c))
+            {
+                bname[i]=toupper(c);
+            }
+            else
+            continue;
+        }
+        key1=bname;
+    cout<<"Enter ID of university that branch is present in: ";
+    cin>>key2;
+    bname=key2;
+    l= bname.length();
+    for(int i=0;i<l;i++)
+        {
+            char c=bname[i];
+            if (islower(c))
+            {
+                bname[i]=toupper(c);
+            }
+            else
+            continue;
+        }
+        key2=bname;
+        l = 1;
+    Branch* p = *start;
+    while (p != NULL)
+    {
+        if (p->branchID == key1 && p->universityID == key2)
+        {
+            l = 0;
+            getchar();
+        string BN, BID, UID;
+            cout<<"\nEnter Branch Name: ";
+            getline(cin, BN);
+            bname=BN;
+            l= bname.length();
+            for(int i=0;i<l;i++)
+            {
+                char c=bname[i];
+                if (islower(c))
+                {
+                    bname[i]=toupper(c);
+                }
+                else
+                continue;
+            }
+            BN=bname;
+            cout<<"Enter University ID: ";
+            getline(cin, UID);
+            bname=UID;
+            l= bname.length();
+            for(int i=0;i<l;i++)
+            {
+                char c=bname[i];
+                if (islower(c))
+                {
+                    bname[i]=toupper(c);
+                }
+                else
+                continue;
+            }
+            UID=bname;
+            cout<<"Enter Branch ID: ";
+            getline(cin, BID);
+            bname=BID;
+            l= bname.length();
+            for(int i=0;i<l;i++)
+            {
+                char c=bname[i];
+                if (islower(c))
+                {
+                    bname[i]=toupper(c);
+                }
+                else
+                continue;
+            }
+            BID=bname;
+            p->branchName = BN;
+            p->universityID = UID;
+            p->branchID = BID;
+        }
+        p = p->next;
+    }
+    if (l == 1)
+        cout<<"\n\nInvalid branch ID or university ID entered!\n\n";
+}
+
 //display list of branches of a particular University
 void DispBranch(struct Branch** start,struct University**start1)
 {   string uc;
@@ -353,6 +545,9 @@ int main()
     b19->next = b20;
     b20->next = NULL;
 
+    BRstart = b1;
+    BRlast = b20;
+    
     do {
         create(&st, &last);
         cout<<"\nDo You Want to Continue (Y/N)?";

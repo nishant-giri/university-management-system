@@ -34,7 +34,7 @@ struct Student {
 };
 
 // Creation of University List
-void create(struct University** start, struct Branch** last) {
+void create(struct University** start, struct University** last) {
     struct University* p = *last;
     University* ptr = new University;
     ptr->next = NULL;
@@ -55,7 +55,7 @@ void create(struct University** start, struct Branch** last) {
     ptr->universityName = tempUniversityName;
     cout<<"Enter University ID: ";
     getline(cin, ptr->universityID);
-    tempUniversityID = ptr->universityID;
+    string tempUniversityID = ptr->universityID;
     l = tempUniversityID.length();
     for (int i = 0; i < l; i++)
     {
@@ -68,7 +68,7 @@ void create(struct University** start, struct Branch** last) {
     ptr->universityID = tempUniversityID;
     cout<<"Enter University Location: ";
     getline(cin, ptr->universityLocation);
-    tempUniversityLocation = ptr->universityLocation;
+    string tempUniversityLocation = ptr->universityLocation;
     l = tempUniversityLocation.length();
     for (int i = 0; i < l; i++)
     {

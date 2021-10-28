@@ -491,7 +491,7 @@ int main()
     universityStart = u1;
     universityLast = u5;
     
-    // Total 4 Branches - 3 Same, 1 Unique
+    // Total 4 Branches - ALL Unique
     
     // 1.1
     struct Branch* b1 = new struct Branch;
@@ -526,7 +526,7 @@ int main()
  
     // 2.1
     struct Branch* b5 = new struct Branch;
-    b5->branchID = "CS1";
+    b5->branchID = "CS2";
     b5->universityID = "U002";
     b5->branchName = "COMPUTER SCIENCE";
     b5->prev = b4;
@@ -534,7 +534,7 @@ int main()
 
     // 2.2
     struct Branch* b6 = new struct Branch;
-    b6->branchID = "EE1";
+    b6->branchID = "EE2";
     b6->universityID = "U002";
     b6->branchName = "ELECTRONICS";
     b6->prev = b5;
@@ -542,7 +542,7 @@ int main()
 
     // 2.3
     struct Branch* b7 = new struct Branch;
-    b7->branchID = "ME1";
+    b7->branchID = "ME2";
     b7->universityID = "U002";
     b7->branchName = "MECHANICAL";
     b7->prev = b6;
@@ -558,7 +558,7 @@ int main()
 
     // 3.1
     struct Branch* b9 = new struct Branch;
-    b9->branchID = "CS1";
+    b9->branchID = "CS3";
     b9->universityID = "U003";
     b9->branchName = "COMPUTER SCIENCE";
     b9->prev = b8;
@@ -566,7 +566,7 @@ int main()
 
     // 3.2
     struct Branch* b10 = new struct Branch;
-    b10->branchID = "EE1";
+    b10->branchID = "EE3";
     b10->universityID = "U003";
     b10->branchName = "ELECTRONICS";
     b10->prev = b9;
@@ -574,7 +574,7 @@ int main()
 
     // 3.3
     struct Branch* b11 = new struct Branch;
-    b11->branchID = "ME1";
+    b11->branchID = "ME3";
     b11->universityID = "U003";
     b11->branchName = "MECHANICAL";
     b11->prev = b10;
@@ -590,7 +590,7 @@ int main()
 
     // 4.1
     struct Branch* b13 = new struct Branch;
-    b13->branchID = "CS1";
+    b13->branchID = "CS4";
     b13->universityID = "U004";
     b13->branchName = "COMPUTER SCIENCE";
     b13->prev = b12;
@@ -598,7 +598,7 @@ int main()
 
     // 4.2
     struct Branch* b14 = new struct Branch;
-    b14->branchID = "EE1";
+    b14->branchID = "EE4";
     b14->universityID = "U004";
     b14->branchName = "ELECTRONICS";
     b14->prev = b13;
@@ -606,7 +606,7 @@ int main()
 
     // 4.3
     struct Branch* b15 = new struct Branch;
-    b15->branchID = "ME1";
+    b15->branchID = "ME4";
     b15->universityID = "U004";
     b15->branchName = "MECHANICAL";
     b15->prev = b14;
@@ -622,7 +622,7 @@ int main()
 
     // 5.1
     struct Branch* b17 = new struct Branch;
-    b17->branchID = "CS1";
+    b17->branchID = "CS5";
     b17->universityID = "U005";
     b17->branchName = "COMPUTER SCIENCE";
     b17->prev = b16;
@@ -630,7 +630,7 @@ int main()
 
     // 5.2
     struct Branch* b18 = new struct Branch;
-    b18->branchID = "EE1";
+    b18->branchID = "EE5";
     b18->universityID = "U005";
     b18->branchName = "ELECTRONICS";
     b18->prev = b17;
@@ -638,7 +638,7 @@ int main()
 
     // 5.3
     struct Branch* b19 = new struct Branch;
-    b19->branchID = "ME1";
+    b19->branchID = "ME5";
     b19->universityID = "U005";
     b19->branchName = "MECHANICAL";
     b19->prev = b18;

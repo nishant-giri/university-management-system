@@ -401,6 +401,229 @@ void modify(Branch** start)
         cout<<"\n\nInvalid branch ID or university ID entered!\n\n";
 }
 
+// University Modification
+void modify(University** start, Branch** BRstart)
+{
+    string key;
+    cout<<"Enter university ID to be modified: ";
+    cin>>key;
+    string bname=key;
+    int l= bname.length();
+    for(int i=0;i<l;i++)
+        {
+            char c=bname[i];
+            if (islower(c))
+            {
+                bname[i]=toupper(c);
+            }
+            else
+            continue;
+        }
+        key=bname;
+        l = 1;
+    University* p = *start;
+    while (p != NULL)
+    {
+        if (p->universityID == key)
+        {
+            l = 0;
+            getchar();
+            string temp_sto = p->universityID;
+        string BN, BID, UID;
+            cout<<"\nEnter University Name: ";
+            getline(cin, BN);
+            bname=BN;
+            l= bname.length();
+            for(int i=0;i<l;i++)
+            {
+                char c=bname[i];
+                if (islower(c))
+                {
+                    bname[i]=toupper(c);
+                }
+                else
+                continue;
+            }
+            BN=bname;
+            cout<<"Enter University ID: ";
+            getline(cin, UID);
+            bname=UID;
+            l= bname.length();
+            for(int i=0;i<l;i++)
+            {
+                char c=bname[i];
+                if (islower(c))
+                {
+                    bname[i]=toupper(c);
+                }
+                else
+                continue;
+            }
+            UID=bname;
+            cout<<"Enter University location: ";
+            getline(cin, BID);
+            bname=BID;
+            l= bname.length();
+            for(int i=0;i<l;i++)
+            {
+                char c=bname[i];
+                if (islower(c))
+                {
+                    bname[i]=toupper(c);
+                }
+                else
+                continue;
+            }
+            BID=bname;
+            cout<<"Enter University's year of commencement: ";
+            cin>>p->startYear;
+            p->universityName = BN;
+            p->universityID = UID;
+            p->universityLocation = BID;
+            Branch* tempo = *BRstart;
+            while (tempo != NULL)
+            {
+                if (tempo->universityID == temp_sto)
+                {
+                    tempo->universityID = p->universityID;
+                }
+                tempo = tempo->next;
+            }
+            break;
+        }
+        p = p->next;
+    }
+    if (l == 1)
+        cout<<"\n\nUniversity ID entered!\n\n";
+}
+
+// Student Deletion
+void remove(Student** start)
+{
+    int key;
+    cout<<"Enter roll number of student: ";
+    cin>>key;
+    Student* p = *start;
+    while (p != NULL)
+    {
+        if (p->rollNumber == key)
+        {
+            p->prev->next = p->next;
+            p->next->prev = p->prev;
+            free(p);
+            printf("\n\nStudent data successfully deleted\n\n");
+            break;
+        }
+        p = p->next;
+    }
+    if(p == NULL)
+        cout<<"\n\nInvalid roll number entered!\n\n";
+}
+
+// Branch Deletion
+void remove(Branch** start)
+{
+    string key1;
+    cout<<"Enter branch ID to be deleted: ";
+    cin>>key1;
+    string bname=key1;
+    int l= bname.length();
+    for(int i=0;i<l;i++)
+        {
+            char c=bname[i];
+            if (islower(c))
+            {
+                bname[i]=toupper(c);
+            }
+            else
+            continue;
+        }
+        key1=bname;
+        l = 1;
+    Branch* p = *start;
+    while (p != NULL)
+    {
+        if (p->branchID == key1)
+        {
+            p->prev->next = p->next;
+            p->next->prev = p->prev;
+            free(p);
+            printf("\n\nBranch data successfully deleted\n\n");
+            break;
+        }
+        p = p->next;
+    }
+    if (l == 1)
+        cout<<"\n\nInvalid branch ID!\n\n";
+}
+
+// University Deletion
+void remove(University** start, Branch** BRstart)
+{
+    string key;
+    cout<<"Enter university ID to be deleted: ";
+    cin>>key;
+    string bname=key;
+    int l= bname.length();
+    for(int i=0;i<l;i++)
+        {
+            char c=bname[i];
+            if (islower(c))
+            {
+                bname[i]=toupper(c);
+            }
+            else
+            continue;
+        }
+        key=bname;
+        l = 1;
+    University* p = *start;
+    cout<<"\n\nFLAG 1\n\n";
+    while (p != NULL)
+    {
+        if (p->universityID == key)
+        {  
+            l = 0;
+            string temp = p->universityID;
+            Branch* t = *BRstart;
+            for (; t != NULL; t = t->next)
+            {
+                if (t->universityID == temp)
+                {
+                    t->prev->next = t->next;
+                    t->next->prev = t->prev;
+                }
+            }
+            p->prev->next = p->next;
+            p->next->prev = p->prev;
+            free(p);
+            printf("\n\nUniversity data successfully deleted\n\n");
+            break;
+        }
+        p = p->next;
+    }
+    if (l == 1)
+        cout<<"\n\nInvalid University ID entered!\n\n";
+}
+
+// Display of students in KIIT's CSE
+void KIIT_CSE_DISP(Student** start)
+{
+    Student* p = *start;
+    while (p != NULL)
+    {
+        if (p->branchID == "CS1")
+        {
+            cout<<"\nName: "<<p->name;
+            cout<<"\nRoll Number: "<<p->rollNumber;
+            cout<<"\nBranch ID: "<<p->branchID;
+            cout<<"\nCGPA: "<<p->cgpa;
+            cout<<"\n\n";
+        }
+        p = p->next;
+    }
+}
+
 // Display List of Branches of a Particular University
 void DispBranch(struct Branch** start,struct University**start1)
 {   string uc;
@@ -418,6 +641,20 @@ struct University* ptr1 = *start1;
   
     cout<<"\n\nEnter the University code:";
     cin>>uc;
+    string ucmod = uc;
+    int l = ucmod.length();
+    for (int i = 0; i < l; i++)
+    {
+            char c = ucmod[i];
+            if (islower(c))
+            {
+                ucmod[i]=toupper(c);
+            }
+            else
+            continue;
+    }
+    uc = ucmod;
+ 
     cout<<"\nBranches available:\n";
      struct Branch *ptr = *start;
     while (ptr != NULL)
@@ -459,7 +696,7 @@ void UniYear(struct University** start)
                 }
             }
         }
-    cout<<"\n\nUniversity details sorted on the basis of thier start year\n\n";
+    cout<<"\n\nUniversity details sorted on the basis of their start year\n\n";
         int *p=a;
     for(int i=0;i<c;i++)
     {
@@ -497,7 +734,7 @@ int main()
     struct University* u1 = new struct University;
     u1->universityName = "KIIT";
     u1->universityID = "U001";
-    u1->universityLocation = "Bhubaneswar";
+    u1->universityLocation = "BHUBANESWAR";
     u1->startYear = 1992;
     u1->prev = NULL;
 
@@ -505,7 +742,7 @@ int main()
     struct University* u2 = new struct University;
     u2->universityName = "VIT";
     u2->universityID = "U002";
-    u2->universityLocation = "Vellore";
+    u2->universityLocation = "VELLORE";
     u2->startYear = 1984;
     u2->prev = u1;
     u1->next = u2;
@@ -514,7 +751,7 @@ int main()
     struct University* u3 = new struct University;
     u3->universityName = "MAHE";
     u3->universityID = "U003";
-    u3->universityLocation = "Manipal";
+    u3->universityLocation = "MANIPAL";
     u3->startYear = 1953;
     u3->prev = u2;
     u2->next = u3;
@@ -523,7 +760,7 @@ int main()
     struct University* u4 = new struct University;
     u4->universityName = "BITS";
     u4->universityID = "U004";
-    u4->universityLocation = "Pilani";
+    u4->universityLocation = "PILANI";
     u4->startYear = 1964;
     u4->prev = u3;
     u3->next = u4;
@@ -532,7 +769,7 @@ int main()
     struct University* u5 = new struct University;
     u5->universityName = "TIET";
     u5->universityID = "U005";
-    u5->universityLocation = "Thapar";
+    u5->universityLocation = "PATIALA";
     u5->startYear = 1956;
     u5->prev = u4;
     u4->next = u5;

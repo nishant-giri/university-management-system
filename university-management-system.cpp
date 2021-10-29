@@ -228,10 +228,11 @@ void create(struct Student **start, struct Student **last , struct Student_head 
 
 // Display Student List 
 void display(struct Student **start, struct Student **last) {
+    cout<<"\nSTUDENT LIST ->\n\n";
     struct Student *ptr;
     ptr = *start;
     while (ptr != NULL) {
-        cout<<"\nName: "<<ptr->name;
+        cout<<"Name: "<<ptr->name;
         cout<<"\nRoll Number: "<<ptr->rollNumber;
         cout<<"\nBranch ID: "<<ptr->branchID;
         cout<<"\nCGPA: "<<ptr->cgpa;
@@ -243,6 +244,7 @@ void display(struct Student **start, struct Student **last) {
 // Display Branch List
 void display(struct Branch** start)
 {
+    cout<<"\nBRANCH LIST ->\n\n";
     struct Branch* ptr = *start;
     while (ptr != NULL)
     {
@@ -257,6 +259,7 @@ void display(struct Branch** start)
 // Display University List
 void display(struct University** start)
 {
+    cout<<"\nUNIVERSITY LIST ->\n\n";
     struct University* ptr = *start;
     while (ptr != NULL)
     {
@@ -525,7 +528,15 @@ void remove(Student** start)
     cout<<"Enter roll number of student: ";
     cin>>key;
     Student* p = *start;
-    while (p != NULL)
+    if (p->rollNumber == key && p->next != NULL)
+    {
+        *start = p->next;
+        p->next->prev = NULL;
+        free(p);
+        printf("\n\nStudent data successfully deleted\n\n");
+        return;
+    }
+    while (p->next != NULL)
     {
         if (p->rollNumber == key)
         {
@@ -533,21 +544,34 @@ void remove(Student** start)
             p->next->prev = p->prev;
             free(p);
             printf("\n\nStudent data successfully deleted\n\n");
-            break;
+            return;
         }
         p = p->next;
     }
-    if(p == NULL)
+    if (p->rollNumber == key && p->prev != NULL)
+    {
+        p->prev->next = NULL;
+        free(p);
+        printf("\n\nStudent data successfully deleted\n\n");
+        return;
+    }
+    else if (p->rollNumber == key && p->prev == NULL)
+    {
+        *start = NULL;
+        free(p);
+        printf("\n\nStudent data successfully deleted\n\n");
+        return;
+    }
         cout<<"\n\nInvalid roll number entered!\n\n";
 }
 
 // Branch Deletion
 void remove(Branch** start)
 {
-    string key1;
+    string key;
     cout<<"Enter branch ID to be deleted: ";
-    cin>>key1;
-    string bname=key1;
+    cin>>key;
+    string bname=key;
     int l= bname.length();
     for(int i=0;i<l;i++)
         {
@@ -559,23 +583,79 @@ void remove(Branch** start)
             else
             continue;
         }
-        key1=bname;
+        key=bname;
         l = 1;
     Branch* p = *start;
-    while (p != NULL)
+    if (p->branchID == key && p->next != NULL)
     {
-        if (p->branchID == key1)
+        *start = p->next;
+        p->next->prev = NULL;
+        free(p);
+        printf("\n\nBranch successfully deleted\n\n");
+        return;
+    }
+    while (p->next != NULL)
+    {
+        if (p->branchID == key)
         {
             p->prev->next = p->next;
             p->next->prev = p->prev;
             free(p);
-            printf("\n\nBranch data successfully deleted\n\n");
-            break;
+            printf("\n\nBranch successfully deleted\n\n");
+            return;
         }
         p = p->next;
     }
-    if (l == 1)
+    if (p->branchID == key && p->prev != NULL)
+    {
+        p->prev->next = NULL;
+        free(p);
+        printf("\n\nBranch successfully deleted\n\n");
+        return;
+    }
+    if (p->branchID == key && p->prev == NULL)
+    {
+        *start = NULL;
+        free(p);
+        printf("\n\nBranch successfully deleted\n\n");
+        return;
+    }
         cout<<"\n\nInvalid branch ID!\n\n";
+}
+
+// Branch Deletion for university deletion
+void remove(Branch** BRstart, string key)
+{
+    Branch* p = *BRstart;
+    while (p->universityID == key && p->next != NULL)
+    {
+        *BRstart = p->next;
+        cout<<"\n\nPASS\n\n";
+        p->next->prev = NULL;
+        Branch* temp = p;
+        p = p->next;
+        free(temp);
+    }
+    while (p->next != NULL)
+    {
+        if (p->universityID == key)
+        {
+            p->prev->next = p->next;
+            p->next->prev = p->prev;
+            free(p);
+        }
+        p = p->next;
+    }
+    if (p->universityID == key && p->prev != NULL)
+    {
+        p->prev->next = NULL;
+        free(p);
+    }
+    else if (p->universityID == key && p->prev == NULL)
+    {
+        *BRstart = NULL;
+        free(p);
+    }
 }
 
 // University Deletion
@@ -599,31 +679,48 @@ void remove(University** start, Branch** BRstart)
         key=bname;
         l = 1;
     University* p = *start;
-    cout<<"\n\nFLAG 1\n\n";
-    while (p != NULL)
+    if (p->universityID == key && p->next != NULL)
+    {
+        *start = p->next;
+        string temp = p->universityID;
+        remove(BRstart, temp);
+        p->next->prev = NULL;
+        free(p);
+        printf("\n\nUniversity data successfully deleted\n\n");
+        return;
+    }
+    while (p->next != NULL)
     {
         if (p->universityID == key)
-        {  
-            l = 0;
+        {
             string temp = p->universityID;
-            Branch* t = *BRstart;
-            for (; t != NULL; t = t->next)
-            {
-                if (t->universityID == temp)
-                {
-                    t->prev->next = t->next;
-                    t->next->prev = t->prev;
-                }
-            }
+            remove(BRstart, temp);
             p->prev->next = p->next;
             p->next->prev = p->prev;
             free(p);
             printf("\n\nUniversity data successfully deleted\n\n");
-            break;
+            return;
         }
         p = p->next;
     }
-    if (l == 1)
+    if (p->universityID == key && p->prev != NULL)
+    {
+        string temp = p->universityID;
+        remove(BRstart, temp);
+        p->prev->next = NULL;
+        free(p);
+        printf("\n\nUniversity data successfully deleted\n\n");
+        return;
+    }
+    else if (p->universityID == key && p->prev == NULL)
+    {
+        *start = NULL;
+        string temp = p->universityID;
+        remove(BRstart, temp);
+        free(p);
+        printf("\n\nUniversity data successfully deleted\n\n");
+        return;
+    }
         cout<<"\n\nInvalid University ID entered!\n\n";
 }
 

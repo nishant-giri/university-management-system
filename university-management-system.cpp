@@ -3,6 +3,24 @@
 #include<cstring>
 using namespace std;
 
+//University Header structure 
+struct Uni_head {
+    int count_uni ;
+    struct University *next;
+}
+
+//Branch Header structure 
+struct Branch_head {
+    int count_branch ;
+    struct Branch *next;
+}
+
+//Student Header structure 
+struct Student_head {
+    int count_stu ;
+    struct Student *next;
+}
+
 // University Structure
 struct University {
     string universityName;
@@ -89,10 +107,11 @@ void create(struct University** start, struct University** last) {
         ptr->prev = p;
         p->next = ptr;
     }
+    
 }
 
 // Creation of Branch List
-void create(struct Branch** start, struct Branch** last) {
+void create(struct Branch** start, struct Branch** last , struct Branch_head *bh) {
     struct Branch* p = *last;
     Branch* ptr = new Branch;
     ptr->next = NULL;
@@ -151,10 +170,11 @@ void create(struct Branch** start, struct Branch** last) {
         ptr->prev = p;
         p->next = ptr;
     }
+    *bh->count_branch++;
 }
 
 // Creation of Student List
-void create(struct Student **start, struct Student **last) {
+void create(struct Student **start, struct Student **last , struct Student_head *sh) {
     Student *ptr = new Student;
     cout<<"Enter Name: ";
     getline(cin, ptr->name);
@@ -203,6 +223,7 @@ void create(struct Student **start, struct Student **last) {
         ptr->prev = *last;
         *last = ptr;
     }
+    *sh->count_stu++;
 }
 
 // Display Student List 
@@ -939,11 +960,18 @@ int main()
     b19->next = b20;
     b20->next = NULL;
 
+    struct Uni_head uh;
+    uh.count_uni = 5;
+    struct Branch_head bh;
+    bh.count_branch = 20;
+    struct Student_head sh;
+    sh.count_stu = 0;
+
     BRstart = b1;
     BRlast = b20;
     
     do {
-        create(&st, &last);
+        create(&st, &last , &sh);
         cout<<"\nDo You Want to Continue (Y/N)?";
         cout<<"\nEnter Your Choice: ";
         cin>>ch;
@@ -956,7 +984,7 @@ int main()
     cin>>ch;
     while (ch == 'y' || ch == 'Y')
     {
-        create(&BRstart, &BRlast);
+        create(&BRstart, &BRlast  ,&bh);
         cout<<"\nDo You Want to Continue (Y/N)?";
         cout<<"\nEnter Your Choice: ";
         cin>>ch;

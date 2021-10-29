@@ -230,6 +230,11 @@ void create(struct Student **start, struct Student **last , struct Student_head 
 void display(struct Student **start, struct Student **last) {
     struct Student *ptr;
     ptr = *start;
+    if (ptr==NULL)
+    {
+        cout<<"no nodes present\n";
+    }
+    else{
     while (ptr != NULL) {
         cout<<"\nName: "<<ptr->name;
         cout<<"\nRoll Number: "<<ptr->rollNumber;
@@ -238,12 +243,18 @@ void display(struct Student **start, struct Student **last) {
         cout<<"\n\n";
         ptr = ptr->next;
     }
+    }
 }
 
 // Display Branch List
 void display(struct Branch** start)
 {
     struct Branch* ptr = *start;
+    if (ptr==NULL)
+    {
+        cout<<"no nodes present\n";
+    }
+    else{
     while (ptr != NULL)
     {
         cout<<"Branch Name: "<<ptr->branchName;
@@ -252,12 +263,18 @@ void display(struct Branch** start)
         cout<<"\n\n";
         ptr = ptr->next;
     }
+    }
 }
 
 // Display University List
 void display(struct University** start)
 {
     struct University* ptr = *start;
+    if (ptr==NULL)
+    {
+        cout<<"no nodes present\n";
+    }
+    else{
     while (ptr != NULL)
     {
         cout<<"University Name: "<<ptr->universityName;
@@ -266,6 +283,7 @@ void display(struct University** start)
         cout<<"\nStart Year: "<<ptr->startYear;
         cout<<"\n";
         ptr = ptr->next;
+    }
     }
 }
 

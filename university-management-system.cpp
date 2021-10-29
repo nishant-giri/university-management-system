@@ -432,6 +432,55 @@ struct University* ptr1 = *start1;
         ptr = ptr->next;
     }
 }
+void UniYear(struct University** start)
+{
+    int c=0;
+    int a[100];
+    struct University* ptr = *start;
+
+
+    while (ptr != NULL)
+    {
+        a[c]=ptr->startYear;
+        c++;
+        ptr=ptr->next;
+    }
+    //sorting
+        int i,j,temp;
+        for(i=0;i<c-1;i++)
+        {
+            for(j=0;j<(c-1)-i;j++)
+            {
+                if(a[j]>a[j+1])
+                {
+                    temp=a[j];
+                    a[j]=a[j+1];
+                    a[j+1]=temp;
+                }
+            }
+        }
+    cout<<"\n\nUniversity details sorted on the basis of thier start year\n\n";
+        int *p=a;
+    for(int i=0;i<c;i++)
+    {
+        int t=*p;
+        struct University* ptr1 = *start;
+        while (ptr1!= NULL)
+        {
+            if(ptr1->startYear==t)
+            {   
+                cout<<"University Name: "<<ptr1->universityName;
+                cout<<"\nUniversity ID: "<<ptr1->universityID;
+                cout<<"\nUniversity Location: "<<ptr1->universityLocation;
+                cout<<"\nStart Year: "<<ptr1->startYear;
+                cout<<"\n\n\n";  
+            }
+            ptr1=ptr1->next;
+        }
+        p++;
+    }
+
+}
 int main()
 {
     struct Student *st = NULL;
@@ -677,7 +726,8 @@ int main()
     }
     display(&st, &last);
     display(&BRstart);
-    display(&u_start);
-    DispBranch(&BRstart,&u_start);
+    display(&universityStart);
+    DispBranch(&BRstart,&universityStart);
+    UniYear(&universityStart);
     return 0;
 }

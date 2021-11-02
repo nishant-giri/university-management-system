@@ -7,19 +7,19 @@ using namespace std;
 struct Uni_head {
     int count_uni ;
     struct University *next;
-}
+};
 
 //Branch Header structure 
 struct Branch_head {
     int count_branch ;
     struct Branch *next;
-}
+};
 
 //Student Header structure 
 struct Student_head {
     int count_stu ;
     struct Student *next;
-}
+};
 
 // University Structure
 struct University {
@@ -127,6 +127,7 @@ void create(struct University** start, struct University** last) {
 void create(struct Branch** start, struct Branch** last , struct Branch_head *bh) {
     struct Branch* p = *last;
     Branch* ptr = new Branch;
+    struct Branch *ptr1=*start; 
     ptr->next = NULL;
     ptr->prev = NULL;
     getchar();
@@ -193,13 +194,17 @@ void create(struct Branch** start, struct Branch** last , struct Branch_head *bh
     {
      cout<<"Branch ID is not unique";
     }
-    *bh->count_branch++;
+    bh->count_branch++;
 }
 
 
 // Creation of Student List
 
+<<<<<<< HEAD
+void create(struct Student **start, struct Student **last , struct Student_head *sh,struct Branch **st) {
+=======
 void create(struct Student **start, struct Student **last , struct Student_head *sh) {
+>>>>>>> 7a2d2eb77f5f762db25f6c121082ccd34f1b455e
     Student *ptr = new Student;
     struct Branch *ptr1=*st;
     struct Student *p=*start;
@@ -267,7 +272,7 @@ void create(struct Student **start, struct Student **last , struct Student_head 
     {
         cout<<"Roll Number is not unique";
     }
-    *sh->count_stu++;
+    sh->count_stu++;
 }
 
 // Display Student List
@@ -1180,7 +1185,7 @@ int main()
     BRlast = b20;
     
     do {
-        create(&st, &last , &sh);
+        create(&st, &last , &sh,&BRstart);
         cout<<"\nDo You Want to Continue (Y/N)?";
         cout<<"\nEnter Your Choice: ";
         cin>>ch;

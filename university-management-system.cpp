@@ -51,9 +51,14 @@ struct Student {
     struct Student *prev;
 };
 
+int CheckAvailableU(struct University**,string);
+int CheckAvailableB(struct Branch**,string);
+int CheckRoll(struct Student**,int);
+
 // Creation of University List
 void create(struct University** start, struct University** last) {
     struct University* p = *last;
+    struct University *t=*start;
     University* ptr = new University;
     ptr->next = NULL;
     ptr->prev = NULL;
@@ -84,33 +89,41 @@ void create(struct University** start, struct University** last) {
             continue;
     }
     ptr->universityID = tempUniversityID;
-    cout<<"Enter University Location: ";
-    getline(cin, ptr->universityLocation);
-    string tempUniversityLocation = ptr->universityLocation;
-    l = tempUniversityLocation.length();
-    for (int i = 0; i < l; i++)
+    int temp = CheckAvailableU(&t,ptr->universityID);
+    if(temp==0)
     {
-        char c = tempUniversityLocation[i];
-        if (islower(c))
-            tempUniversityLocation[i] = toupper(c);
-        else
-            continue;
+        cout<<"Enter University Location: ";
+        getline(cin, ptr->universityLocation);
+        string tempUniversityLocation = ptr->universityLocation;
+        l = tempUniversityLocation.length();
+        for (int i = 0; i < l; i++)
+        {
+            char c = tempUniversityLocation[i];
+            if (islower(c))
+                tempUniversityLocation[i] = toupper(c);
+            else
+                continue;
+        }
+        ptr->universityLocation = tempUniversityLocation;
+        cout<<"Enter Start Year of University: ";
+        cin>>ptr->universityLocation;
+        if (*start == NULL) {
+            *start = ptr;
+            *last = ptr;
+        }
+        else {
+            ptr->prev = p;
+            p->next = ptr;
+        }
     }
-    ptr->universityLocation = tempUniversityLocation;
-    cout<<"Enter Start Year of University: ";
-    cin>>ptr->universityLocation;
-    if (*start == NULL) {
-        *start = ptr;
-        *last = ptr;
-    }
-    else {
-        ptr->prev = p;
-        p->next = ptr;
+    else
+    {
+        cout<<"University ID is not unique.";
     }
     
 }
-
 // Creation of Branch List
+
 void create(struct Branch** start, struct Branch** last , struct Branch_head *bh) {
     struct Branch* p = *last;
     Branch* ptr = new Branch;
@@ -162,20 +175,34 @@ void create(struct Branch** start, struct Branch** last , struct Branch_head *bh
           continue;
     }
     ptr->branchID=bname;
-    if (*start == NULL) {
-        *start = ptr;
-        *last = ptr;
+    int temp= CheckAvailableB(&ptr1, ptr->branchID);
+    if(temp==0)
+    {
+        if (*start == NULL)
+        {
+            *start = ptr;
+            *last = ptr;
+        }
+        else
+        {
+            ptr->prev = p;
+            p->next = ptr;
+        }
     }
-    else {
-        ptr->prev = p;
-        p->next = ptr;
+    else 
+    {
+     cout<<"Branch ID is not unique";
     }
     *bh->count_branch++;
 }
 
+
 // Creation of Student List
+
 void create(struct Student **start, struct Student **last , struct Student_head *sh) {
     Student *ptr = new Student;
+    struct Branch *ptr1=*st;
+    struct Student *p=*start;
     cout<<"Enter Name: ";
     getline(cin, ptr->name);
     string sname=ptr->name;
@@ -194,39 +221,56 @@ void create(struct Student **start, struct Student **last , struct Student_head 
     ptr->name=sname;
     cout<<"Enter Roll Number: ";
     cin>>ptr->rollNumber;
-    getchar();
-    cout<<"Enter Branch ID: ";
-    getline(cin, ptr->branchID);
-    sname=ptr->branchID;
-    l= sname.length();
-    for(int i=0;i<l;i++)
-    {
-        char c=sname[i];
-        if (islower(c))
+    int t= CheckRoll(&p,ptr->rollNumber);
+    if(t==0)
+    {    getchar();
+        cout<<"Enter Branch ID: ";
+        getline(cin, ptr->branchID);
+        sname=ptr->branchID;
+        l= sname.length();
+        for(int i=0;i<l;i++)
         {
-            sname[i]=toupper(c);
+            char c=sname[i];
+            if (islower(c))
+            {
+                sname[i]=toupper(c);
+            }
+            else
+            continue;
+        }
+        ptr->branchID=sname;
+        int temp= CheckAvailableB(&ptr1,ptr->branchID);
+        if(temp==1)
+        {
+            cout<<"Enter CGPA: ";
+            cin>>ptr->cgpa;
+            ptr->next = NULL;
+            ptr->prev = NULL;
+            if (*start == NULL) 
+            {
+                *start = ptr;
+                *last = ptr;  
+            }
+            else
+            {
+                (*last)->next = ptr;
+                ptr->prev = *last;
+                *last = ptr;
+            }
         }
         else
-          continue;
+        {
+            cout<<"Branch ID not available";
+        }
     }
-    ptr->branchID=sname;
-    cout<<"Enter CGPA: ";
-    cin>>ptr->cgpa;
-    ptr->next = NULL;
-    ptr->prev = NULL;
-    if (*start == NULL) {
-        *start = ptr;
-        *last = ptr;  
-    }
-    else {
-        (*last)->next = ptr;
-        ptr->prev = *last;
-        *last = ptr;
+    else
+    {
+        cout<<"Roll Number is not unique";
     }
     *sh->count_stu++;
 }
 
-// Display Student List 
+// Display Student List
 void display(struct Student **start, struct Student **last) {
     cout<<"\nSTUDENT LIST ->\n\n";
     struct Student *ptr;
@@ -854,6 +898,56 @@ void UniYear(struct University** start)
     }
 
 }
+int CheckAvailableU(struct University** start,string ID)
+{
+   
+    struct University* ptr = *start;
+    while (ptr != NULL)
+    {
+        int sid=ID.compare(ptr->universityID);
+       if(sid==0)
+       {
+         return 1;
+       }
+        ptr=ptr->next;
+    }
+     
+   return 0;
+} 
+
+int CheckAvailableB(struct Branch** start,string ID)
+{
+struct Branch *ptr1=*start;
+while (ptr1!= NULL)
+    {
+        int sid=ID.compare(ptr1->branchID);
+        if(sid==0)
+            {
+             return 1;
+            }
+        
+        ptr1=ptr1->next;
+    }
+    return 0;
+}
+int CheckRoll(struct Student** start,int rn)
+{
+struct Student *ptr1=*start;
+while (ptr1!= NULL)
+    {
+        if(rn==ptr1->rollNumber)
+            {
+             return 1;
+            }
+        
+        ptr1=ptr1->next;
+    }
+    return 0;
+}
+
+
+
+
 int main()
 {
     struct Student *st = NULL;

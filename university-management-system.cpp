@@ -3,19 +3,19 @@
 #include<cstring>
 using namespace std;
 
-//University Header structure 
+// University Header Structure 
 struct Uni_head {
     int count_uni ;
     struct University *next;
 };
 
-//Branch Header structure 
+// Branch Header Structure 
 struct Branch_head {
     int count_branch ;
     struct Branch *next;
 };
 
-//Student Header structure 
+// Student Header Structure 
 struct Student_head {
     int count_stu ;
     struct Student *next;
@@ -120,10 +120,9 @@ void create(struct University** start, struct University** last) {
     {
         cout<<"University ID is not unique.";
     }
-    
 }
-// Creation of Branch List
 
+// Creation of Branch List
 void create(struct Branch** start, struct Branch** last , struct Branch_head *bh) {
     struct Branch* p = *last;
     Branch* ptr = new Branch;
@@ -133,139 +132,118 @@ void create(struct Branch** start, struct Branch** last , struct Branch_head *bh
     getchar();
     cout<<"\nEnter Branch Name: ";
     getline(cin, ptr->branchName);
-    string bname=ptr->branchName;
-    int l= bname.length();
-    for(int i=0;i<l;i++)
-    {
-        char c=bname[i];
-        if (islower(c))
-        {
-            bname[i]=toupper(c);
+    string bname = ptr->branchName;
+    int l = bname.length();
+    for (int i = 0; i < l; i++) {
+        char c = bname[i];
+        if (islower(c)) {
+            bname[i] = toupper(c);
         }
         else
-          continue;
+            continue;
     }
-    ptr->branchName=bname;
+    ptr->branchName = bname;
     cout<<"Enter University ID: ";
     getline(cin, ptr->universityID);
-    bname=ptr->universityID;
-    l= bname.length();
-    for(int i=0;i<l;i++)
-    {
-        char c=bname[i];
-        if (islower(c))
-        {
-            bname[i]=toupper(c);
+    bname = ptr->universityID;
+    l = bname.length();
+    for(int i = 0; i < l; i++) {
+        char c = bname[i];
+        if (islower(c)) {
+            bname[i] = toupper(c);
         }
         else
-          continue;
+            continue;
     }
-    ptr->universityID=bname;
+    ptr->universityID = bname;
     cout<<"Enter Branch ID: ";
     getline(cin, ptr->branchID);
-    bname=ptr->branchID;
-    l= bname.length();
-    for(int i=0;i<l;i++)
-    {
-        char c=bname[i];
-        if (islower(c))
-        {
-            bname[i]=toupper(c);
+    bname = ptr->branchID;
+    l = bname.length();
+    for(int i = 0; i < l; i++) {
+        char c = bname[i];
+        if (islower(c)) {
+            bname[i] = toupper(c);
         }
         else
-          continue;
+            continue;
     }
-    ptr->branchID=bname;
-    int temp= CheckAvailableB(&ptr1, ptr->branchID);
-    if(temp==0)
-    {
-        if (*start == NULL)
-        {
+    ptr->branchID = bname;
+    int temp = CheckAvailableB(&ptr1, ptr->branchID);
+    if (temp == 0) {
+        if (*start == NULL) {
             *start = ptr;
             *last = ptr;
         }
-        else
-        {
+        else {
             ptr->prev = p;
             p->next = ptr;
         }
     }
-    else 
-    {
+    else {
      cout<<"Branch ID is not unique";
     }
     bh->count_branch++;
 }
 
-
 // Creation of Student List
-
-void create(struct Student **start, struct Student **last , struct Student_head *sh,struct Branch **st) {
+void create(struct Student **start, struct Student **last, struct Student_head *sh, struct Branch **st) {
     Student *ptr = new Student;
-    struct Branch *ptr1=*st;
-    struct Student *p=*start;
+    struct Branch *ptr1 = *st;
+    struct Student *p = *start;
     cout<<"Enter Name: ";
     getline(cin, ptr->name);
-    string sname=ptr->name;
-    int l= sname.length();
-    for(int i=0;i<l;i++)
-    {
-        char c=sname[i];
-        if (islower(c))
-        {
-            sname[i]=toupper(c);
+    string sname = ptr->name;
+    int l = sname.length();
+    for (int i = 0; i < l; i++) {
+        char c = sname[i];
+        if (islower(c)) {
+            sname[i] = toupper(c);
         }
         else
-          continue;
+            continue;
 
     }
-    ptr->name=sname;
+    ptr->name = sname;
     cout<<"Enter Roll Number: ";
     cin>>ptr->rollNumber;
-    int t= CheckRoll(&p,ptr->rollNumber);
-    if(t==0)
-    {    getchar();
+    int t = CheckRoll(&p, ptr->rollNumber);
+    if (t == 0) {    
+        getchar();
         cout<<"Enter Branch ID: ";
         getline(cin, ptr->branchID);
-        sname=ptr->branchID;
-        l= sname.length();
-        for(int i=0;i<l;i++)
-        {
-            char c=sname[i];
-            if (islower(c))
-            {
+        sname = ptr->branchID;
+        l = sname.length();
+        for (int i = 0; i < l; i++) {
+            char c = sname[i];
+            if (islower(c)) {
                 sname[i]=toupper(c);
             }
             else
-            continue;
+                continue;
         }
-        ptr->branchID=sname;
-        int temp= CheckAvailableB(&ptr1,ptr->branchID);
-        if(temp==1)
-        {
+        ptr->branchID = sname;
+        int temp = CheckAvailableB(&ptr1,ptr->branchID);
+        if (temp == 1) {
             cout<<"Enter CGPA: ";
             cin>>ptr->cgpa;
             ptr->next = NULL;
             ptr->prev = NULL;
-            if (*start == NULL) 
-            {
+            if (*start == NULL) {
                 *start = ptr;
                 *last = ptr;  
             }
-            else
-            {
+            else {
                 (*last)->next = ptr;
                 ptr->prev = *last;
                 *last = ptr;
             }
         }
-        else
-        {
+        else {
             cout<<"Branch ID not available";
         }
     }
-    else
-    {
+    else {
         cout<<"Roll Number is not unique";
     }
     sh->count_stu++;
@@ -276,62 +254,55 @@ void display(struct Student **start, struct Student **last) {
     cout<<"\nSTUDENT LIST ->\n\n";
     struct Student *ptr;
     ptr = *start;
-    if (ptr==NULL)
-    {
-        cout<<"no nodes present\n";
+    if (ptr == NULL) {
+        cout<<"No Nodes Present\n";
     }
-    else{
-    while (ptr != NULL) {
-        cout<<"Name: "<<ptr->name;
-        cout<<"\nRoll Number: "<<ptr->rollNumber;
-        cout<<"\nBranch ID: "<<ptr->branchID;
-        cout<<"\nCGPA: "<<ptr->cgpa;
-        cout<<"\n\n";
-        ptr = ptr->next;
-    }
+    else {
+        while (ptr != NULL) {
+            cout<<"Name: "<<ptr->name;
+            cout<<"\nRoll Number: "<<ptr->rollNumber;
+            cout<<"\nBranch ID: "<<ptr->branchID;
+            cout<<"\nCGPA: "<<ptr->cgpa;
+            cout<<"\n\n";
+            ptr = ptr->next;
+        }
     }
 }
 
 // Display Branch List
-void display(struct Branch** start)
-{
+void display(struct Branch** start) {
     cout<<"\nBRANCH LIST ->\n\n";
     struct Branch* ptr = *start;
-    if (ptr==NULL)
-    {
-        cout<<"no nodes present\n";
+    if (ptr == NULL) {
+        cout<<"No Nodes Present\n";
     }
-    else{
-    while (ptr != NULL)
-    {
-        cout<<"Branch Name: "<<ptr->branchName;
-        cout<<"\nBranch ID: "<<ptr->branchID;
-        cout<<"\nUniversity ID: "<<ptr->universityID;
-        cout<<"\n\n";
-        ptr = ptr->next;
-    }
+    else {
+        while (ptr != NULL) {
+            cout<<"Branch Name: "<<ptr->branchName;
+            cout<<"\nBranch ID: "<<ptr->branchID;
+            cout<<"\nUniversity ID: "<<ptr->universityID;
+            cout<<"\n\n";
+            ptr = ptr->next;
+        }
     }
 }
 
 // Display University List
-void display(struct University** start)
-{
+void display(struct University** start) {
     cout<<"\nUNIVERSITY LIST ->\n\n";
     struct University* ptr = *start;
-    if (ptr==NULL)
-    {
+    if (ptr == NULL) {
         cout<<"no nodes present\n";
     }
-    else{
-    while (ptr != NULL)
-    {
-        cout<<"University Name: "<<ptr->universityName;
-        cout<<"\nUniversity ID: "<<ptr->universityID;
-        cout<<"\nUniversity Location: "<<ptr->universityLocation;
-        cout<<"\nStart Year: "<<ptr->startYear;
-        cout<<"\n";
-        ptr = ptr->next;
-    }
+    else {
+        while (ptr != NULL) {
+            cout<<"University Name: "<<ptr->universityName;
+            cout<<"\nUniversity ID: "<<ptr->universityID;
+            cout<<"\nUniversity Location: "<<ptr->universityLocation;
+            cout<<"\nStart Year: "<<ptr->startYear;
+            cout<<"\n";
+            ptr = ptr->next;
+        }
     }
 }
 

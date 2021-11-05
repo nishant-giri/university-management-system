@@ -9,7 +9,7 @@ struct Uni_head {
     struct University *next;
 } uh;
 
-// Branch Header Structure 
+// Branch Header Structure
 struct Branch_head {
     int count_branch ;
     struct Branch *next;
@@ -19,7 +19,7 @@ struct Branch_head {
 struct Student_head {
     int count_stu ;
     struct Student *next;
-} sh;
+}sh;
 
 // University Structure
 struct University {
@@ -92,6 +92,7 @@ void create(struct University** start, struct University** last) {
     int temp = CheckAvailableU(&t,ptr->universityID);
     if(temp==0)
     {
+        uh.count_uni++;
         cout<<"Enter University Location: ";
         getline(cin, ptr->universityLocation);
         string tempUniversityLocation = ptr->universityLocation;
@@ -123,7 +124,7 @@ void create(struct University** start, struct University** last) {
 }
 
 // Creation of Branch List
-void create(struct Branch** start, struct Branch** last , struct Branch_head *bh) {
+void create(struct Branch** start, struct Branch** last) {
     struct Branch* p = *last;
     Branch* ptr = new Branch;
     struct Branch *ptr1=*start; 
@@ -171,6 +172,7 @@ void create(struct Branch** start, struct Branch** last , struct Branch_head *bh
     ptr->branchID = bname;
     int temp = CheckAvailableB(&ptr1, ptr->branchID);
     if (temp == 0) {
+        bh.count_branch++;
         if (*start == NULL) {
             *start = ptr;
             *last = ptr;
@@ -183,11 +185,10 @@ void create(struct Branch** start, struct Branch** last , struct Branch_head *bh
     else {
      cout<<"Branch ID is not unique";
     }
-    bh->count_branch++;
 }
 
 // Creation of Student List
-void create(struct Student **start, struct Student **last, struct Student_head *sh, struct Branch **st) {
+void create(struct Student **start, struct Student **last, struct Branch **st) {
     Student *ptr = new Student;
     struct Branch *ptr1 = *st;
     struct Student *p = *start;
@@ -208,7 +209,8 @@ void create(struct Student **start, struct Student **last, struct Student_head *
     cout<<"Enter Roll Number: ";
     cin>>ptr->rollNumber;
     int t = CheckRoll(&p, ptr->rollNumber);
-    if (t == 0) {    
+    if (t == 0) {
+        sh.count_stu++;
         getchar();
         cout<<"Enter Branch ID: ";
         getline(cin, ptr->branchID);
@@ -246,7 +248,6 @@ void create(struct Student **start, struct Student **last, struct Student_head *
     else {
         cout<<"Roll Number is not unique";
     }
-    sh->count_stu++;
 }
 
 // Display Student List
@@ -574,6 +575,7 @@ void remove(Student** start)
     {
         if (p->rollNumber == key)
         {
+            sh.count_stu--;
             p->prev->next = p->next;
             p->next->prev = p->prev;
             free(p);
@@ -584,6 +586,7 @@ void remove(Student** start)
     }
     if (p->rollNumber == key && p->prev != NULL)
     {
+        sh.count_stu--;
         p->prev->next = NULL;
         free(p);
         printf("\n\nStudent data successfully deleted\n\n");
@@ -591,13 +594,13 @@ void remove(Student** start)
     }
     else if (p->rollNumber == key && p->prev == NULL)
     {
+        sh.count_stu--;
         *start = NULL;
         free(p);
         printf("\n\nStudent data successfully deleted\n\n");
         return;
     }
         cout<<"\n\nInvalid roll number entered!\n\n";
-     sh.count_stu--;
 }
 
 // Branch Deletion
@@ -623,6 +626,7 @@ void remove(Branch** start)
     Branch* p = *start;
     if (p->branchID == key && p->next != NULL)
     {
+        bh.count_branch--;
         *start = p->next;
         p->next->prev = NULL;
         free(p);
@@ -633,6 +637,7 @@ void remove(Branch** start)
     {
         if (p->branchID == key)
         {
+            bh.count_branch--;
             p->prev->next = p->next;
             p->next->prev = p->prev;
             free(p);
@@ -643,6 +648,7 @@ void remove(Branch** start)
     }
     if (p->branchID == key && p->prev != NULL)
     {
+        bh.count_branch--;
         p->prev->next = NULL;
         free(p);
         printf("\n\nBranch successfully deleted\n\n");
@@ -650,13 +656,13 @@ void remove(Branch** start)
     }
     if (p->branchID == key && p->prev == NULL)
     {
+        bh.count_branch--;
         *start = NULL;
         free(p);
         printf("\n\nBranch successfully deleted\n\n");
         return;
     }
         cout<<"\n\nInvalid branch ID!\n\n";
-     bh.count_branch--;
 }
 
 // Branch Deletion for university deletion
@@ -665,6 +671,7 @@ void remove(Branch** BRstart, string key)
     Branch* p = *BRstart;
     while (p->universityID == key && p->next != NULL)
     {
+        bh.count_branch--;
         *BRstart = p->next;
         cout<<"\n\nPASS\n\n";
         p->next->prev = NULL;
@@ -676,6 +683,7 @@ void remove(Branch** BRstart, string key)
     {
         if (p->universityID == key)
         {
+            bh.count_branch--;
             p->prev->next = p->next;
             p->next->prev = p->prev;
             free(p);
@@ -684,15 +692,16 @@ void remove(Branch** BRstart, string key)
     }
     if (p->universityID == key && p->prev != NULL)
     {
+        bh.count_branch--;
         p->prev->next = NULL;
         free(p);
     }
     else if (p->universityID == key && p->prev == NULL)
     {
+        bh.count_branch--;
         *BRstart = NULL;
         free(p);
     }
-     bh.count_branch--;
 }
 
 // University Deletion
@@ -718,6 +727,7 @@ void remove(University** start, Branch** BRstart)
     University* p = *start;
     if (p->universityID == key && p->next != NULL)
     {
+        uh.count_uni--;
         *start = p->next;
         string temp = p->universityID;
         remove(BRstart, temp);
@@ -730,6 +740,7 @@ void remove(University** start, Branch** BRstart)
     {
         if (p->universityID == key)
         {
+            uh.count_uni--;
             string temp = p->universityID;
             remove(BRstart, temp);
             p->prev->next = p->next;
@@ -742,6 +753,7 @@ void remove(University** start, Branch** BRstart)
     }
     if (p->universityID == key && p->prev != NULL)
     {
+        uh.count_uni--;
         string temp = p->universityID;
         remove(BRstart, temp);
         p->prev->next = NULL;
@@ -751,6 +763,7 @@ void remove(University** start, Branch** BRstart)
     }
     else if (p->universityID == key && p->prev == NULL)
     {
+        uh.count_uni--;
         *start = NULL;
         string temp = p->universityID;
         remove(BRstart, temp);
@@ -982,6 +995,7 @@ int main()
     
     universityStart = u1;
     universityLast = u5;
+    uh.next = universityStart;    
     
     // Total 4 Branches - ALL Unique
     
@@ -1154,7 +1168,8 @@ int main()
 
     BRstart = b1;
     BRlast = b20;
-    
+    bh.next = BRstart;
+
     do {
         cout<<"1. Add Student Details\n";
         cout<<"2. Modify Student Details\n";
@@ -1183,7 +1198,7 @@ int main()
         switch(choice) {
             case 1: 
                 do {
-                    create(&st, &last, &sh, &BRstart);
+                    create(&st, &last, &BRstart);
                     cout<<"\nDo You Want to Continue (Y/N)?";
                     cout<<"\nEnter Your Choice: ";
                     cin>>ch;
@@ -1202,7 +1217,7 @@ int main()
                 cout<<"\nEnter Your Choice: ";
                 cin>>ch;
                 while (ch == 'y' || ch == 'Y') {
-                    create(&BRstart, &BRlast  ,&bh);
+                    create(&BRstart, &BRlast);
                     cout<<"\nDo You Want to Continue (Y/N)?";
                     cout<<"\nEnter Your Choice: ";
                     cin>>ch;

@@ -597,7 +597,7 @@ void remove(Student** start)
         return;
     }
         cout<<"\n\nInvalid roll number entered!\n\n";
-     sh->count_student--;
+     sh.count_stu--;
 }
 
 // Branch Deletion
@@ -656,7 +656,7 @@ void remove(Branch** start)
         return;
     }
         cout<<"\n\nInvalid branch ID!\n\n";
-     bh->count_branch--;
+     bh.count_branch--;
 }
 
 // Branch Deletion for university deletion
@@ -692,7 +692,7 @@ void remove(Branch** BRstart, string key)
         *BRstart = NULL;
         free(p);
     }
-     bh->count_branch--;
+     bh.count_branch--;
 }
 
 // University Deletion
@@ -932,6 +932,7 @@ int main()
     struct University* universityStart = NULL;
     struct University* universityLast = NULL;
     char ch;
+    int choice;
 
     // Total 5 Universities
      
@@ -1155,29 +1156,78 @@ int main()
     BRlast = b20;
     
     do {
-        create(&st, &last, &sh, &BRstart);
-        cout<<"\nDo You Want to Continue (Y/N)?";
-        cout<<"\nEnter Your Choice: ";
-        cin>>ch;
-        getchar();
+        cout<<"1. Add Student Details\n";
+        cout<<"2. Modify Student Details\n";
+        cout<<"3. Delete Student Details\n";
+        cout<<"4. Update Student Details\n";
+        cout<<"5. Display Students' Details\n";
+        cout<<"6. Display KiiTians' Details\n";
+        cout<<"7. Display CSE KiiTians' Details\n";
+        cout<<"8. Add Branch Details\n";
+        cout<<"9. Modify Branch Details\n";
+        cout<<"10. Delete Branch Details\n";
+        cout<<"11. Display Branches' Details\n";
+        cout<<"12. Display Branches of a Given University\n";
+        cout<<"13. Add University Details\n";
+        cout<<"14. Modify University Details\n";
+        cout<<"15. Delete University Details\n";
+        cout<<"16. Display Universities' Details\n";
+        cout<<"17. Display Universities' Details in Ascending Order of Start Year\n";
+        cout<<"18. Display Student Name for a Given Substring\n";
+        cout<<"19. Display University Name for a Given Substring\n";
+        cout<<"20. Exit\n\n";
+        cout<<"Enter Your Choice: ";
+        cin>>choice;
         cout<<"\n";
-    } while ((ch == 'y') || (ch == 'Y'));
-    sh->next = *st;
-    ch = '0';
-    cout<<"Do You Want to Create a Branch (Y/N)?";
-    cout<<"\nEnter Your Choice: ";
-    cin>>ch;
-    while (ch == 'y' || ch == 'Y')
-    {
-        create(&BRstart, &BRlast  ,&bh);
-        cout<<"\nDo You Want to Continue (Y/N)?";
-        cout<<"\nEnter Your Choice: ";
-        cin>>ch;
-    }
-    display(&st, &last);
-    display(&BRstart);
-    display(&universityStart);
-    DispBranch(&BRstart,&universityStart);
-    UniYear(&universityStart);
+        getchar();
+        switch(choice) {
+            case 1: 
+                do {
+                    create(&st, &last, &sh, &BRstart);
+                    cout<<"\nDo You Want to Continue (Y/N)?";
+                    cout<<"\nEnter Your Choice: ";
+                    cin>>ch;
+                    getchar();
+                    cout<<"\n";
+                } while ((ch == 'y') || (ch == 'Y'));
+                 sh.next = st;
+                 break;
+            
+            case 5:
+                display(&st, &last);
+                break;
+
+            case 8: 
+                cout<<"Do You Want to Create a Branch (Y/N)?";
+                cout<<"\nEnter Your Choice: ";
+                cin>>ch;
+                while (ch == 'y' || ch == 'Y') {
+                    create(&BRstart, &BRlast  ,&bh);
+                    cout<<"\nDo You Want to Continue (Y/N)?";
+                    cout<<"\nEnter Your Choice: ";
+                    cin>>ch;
+                }
+                break;
+            
+            case 11: 
+                display(&BRstart);
+                break;
+
+            case 12:
+                DispBranch(&BRstart,&universityStart);
+                break;
+
+            case 16:
+                display(&universityStart);
+                break;
+
+            case 17:
+                UniYear(&universityStart);
+                break;
+
+            case 20:
+                exit(0);
+        } 
+    } while(choice);
     return 0;
 }

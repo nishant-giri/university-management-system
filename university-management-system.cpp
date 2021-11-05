@@ -597,6 +597,7 @@ void remove(Student** start)
         return;
     }
         cout<<"\n\nInvalid roll number entered!\n\n";
+     sh->count_student--;
 }
 
 // Branch Deletion
@@ -655,6 +656,7 @@ void remove(Branch** start)
         return;
     }
         cout<<"\n\nInvalid branch ID!\n\n";
+     bh->count_branch--;
 }
 
 // Branch Deletion for university deletion
@@ -690,6 +692,7 @@ void remove(Branch** BRstart, string key)
         *BRstart = NULL;
         free(p);
     }
+     bh->count_branch--;
 }
 
 // University Deletion

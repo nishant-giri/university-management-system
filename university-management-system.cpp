@@ -210,7 +210,6 @@ void create(struct Student **start, struct Student **last, struct Branch **st) {
     cin>>ptr->rollNumber;
     int t = CheckRoll(&p, ptr->rollNumber);
     if (t == 0) {
-        sh.count_stu++;
         getchar();
         cout<<"Enter Branch ID: ";
         getline(cin, ptr->branchID);
@@ -227,6 +226,7 @@ void create(struct Student **start, struct Student **last, struct Branch **st) {
         ptr->branchID = sname;
         int temp = CheckAvailableB(&ptr1,ptr->branchID);
         if (temp == 1) {
+            sh.count_stu++;
             cout<<"Enter CGPA: ";
             cin>>ptr->cgpa;
             ptr->next = NULL;

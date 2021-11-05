@@ -7,19 +7,19 @@ using namespace std;
 struct Uni_head {
     int count_uni ;
     struct University *next;
-};
+} uh;
 
 // Branch Header Structure 
 struct Branch_head {
     int count_branch ;
     struct Branch *next;
-};
+} bh;
 
 // Student Header Structure 
 struct Student_head {
     int count_stu ;
     struct Student *next;
-};
+} sh;
 
 // University Structure
 struct University {
@@ -1144,24 +1144,25 @@ int main()
     b19->next = b20;
     b20->next = NULL;
 
-    struct Uni_head uh;
+    //struct Uni_head uh;
     uh.count_uni = 5;
-    struct Branch_head bh;
+    //struct Branch_head bh;
     bh.count_branch = 20;
-    struct Student_head sh;
+    //struct Student_head sh;
     sh.count_stu = 0;
 
     BRstart = b1;
     BRlast = b20;
     
     do {
-        create(&st, &last , &sh,&BRstart);
+        create(&st, &last, &sh, &BRstart);
         cout<<"\nDo You Want to Continue (Y/N)?";
         cout<<"\nEnter Your Choice: ";
         cin>>ch;
         getchar();
         cout<<"\n";
     } while ((ch == 'y') || (ch == 'Y'));
+    sh->next = *st;
     ch = '0';
     cout<<"Do You Want to Create a Branch (Y/N)?";
     cout<<"\nEnter Your Choice: ";

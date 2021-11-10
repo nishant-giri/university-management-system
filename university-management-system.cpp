@@ -322,8 +322,7 @@ void modify(Student** start)
             getline(cin, p->name);
             string sname=p->name;
             int l= sname.length();
-            for(int i=0;i<l;i++)
-            {
+            for(int i=0;i<l;i++) {
                 char c=sname[i];
                 if (islower(c))
                 {

@@ -343,8 +343,7 @@ void modify(Student** start)
             for(int i=0;i<l;i++)
             {
                 char c=sname[i];
-                if (islower(c))
-                {
+                if (islower(c)) {
                     sname[i]=toupper(c);
                 }
                 else
